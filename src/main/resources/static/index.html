@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Board</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <insert-form></insert-form>
+    <board-detail></board-detail>
+    <board-list></board-list>
+</div>
+<script type="text/javascript">
+    Vue.component('insert-form', {
+        template: '<div>insert form</div>'
+    });
+    Vue.component('board-list', {
+        template: '<div>board-list</div>'
+    });
+    Vue.component('board-detail', {
+        template: '<div>board-detail</div>'
+    });
+    const vm = new Vue({
+        el: '#app',
+        data: {
+        },
+        created() {
+        },
+        methods: {
+        }
+    });
+</script>
+</body>
+</html>
