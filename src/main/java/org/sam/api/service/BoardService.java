@@ -2,7 +2,7 @@ package org.sam.api.service;
 
 import org.sam.api.domain.Post;
 import org.sam.api.repositoty.BoardDao;
-import org.sam.server.annotation.Service;
+import org.sam.server.annotation.component.Service;
 
 import java.util.List;
 

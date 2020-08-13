@@ -2,6 +2,7 @@ package org.sam.api.handler;
 
 import org.sam.api.domain.Post;
 import org.sam.api.service.BoardService;
+import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
 import org.sam.server.http.ResponseEntity;
 

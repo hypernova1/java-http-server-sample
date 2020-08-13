@@ -1,6 +1,6 @@
 package org.sam.api.handler;
 
-import org.sam.server.annotation.handle.Handler;
+import org.sam.server.annotation.component.Handler;
 
 /**
  * Created by melchor

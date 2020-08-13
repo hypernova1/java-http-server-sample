@@ -1,7 +1,7 @@
 package org.sam.api.repositoty;
 
 import org.sam.api.domain.Post;
-import org.sam.server.annotation.Component;
+import org.sam.server.annotation.component.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
