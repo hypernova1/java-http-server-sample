@@ -1,7 +1,6 @@
 package org.sam.api.service;
 
 import org.sam.api.domain.Post;
-import org.sam.api.repositoty.BoardDao;
 import org.sam.server.annotation.component.Service;
 
 import java.util.List;
@@ -14,17 +13,10 @@ import java.util.List;
 @Service
 public class BoardService {
 
-    private final BoardDao boardDao;
-
-    public BoardService(BoardDao boardDao) {
-        this.boardDao = boardDao;
-    }
-
     public List<Post> getBoardList() {
-        return boardDao.selectBoardList();
+        return null;
     }
 
     public void registerPost(Post post) {
-        boardDao.insertPost(post);
     }
 }

@@ -37,4 +37,10 @@ public class BoardHandler {
         return ResponseEntity.ok(null);
     }
 
+    @RestApi
+    @GetHandle
+    public ResponseEntity<?> helloWorld() {
+        return ResponseEntity.ok("hello world");
+    }
+
 }
