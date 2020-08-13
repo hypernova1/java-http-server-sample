@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar -cp target/classes:target/dependency/* org.sam.api.Application
+web: java $JAVA_OPTS -cp target/classes:target/dependency/* org.sam.api.Application
