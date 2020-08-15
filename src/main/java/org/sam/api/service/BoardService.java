@@ -1,8 +1,12 @@
 package org.sam.api.service;
 
+import org.sam.api.domain.Member;
 import org.sam.api.domain.Post;
-import org.sam.api.repositoty.BoardDao;
+import org.sam.api.repositoty.BoardRepository;
 import org.sam.server.annotation.component.Service;
+import org.sam.server.constant.HttpStatus;
+import org.sam.server.http.ResponseEntity;
+import org.sam.server.http.Session;
 
 import java.util.List;
 
@@ -14,17 +18,21 @@ import java.util.List;
 @Service
 public class BoardService {
 
-    private final BoardDao boardDao;
+    private final BoardRepository boardRepository;
 
-    public BoardService(BoardDao boardDao) {
-        this.boardDao = boardDao;
+    public BoardService(BoardRepository boardRepository) {
+        this.boardRepository = boardRepository;
     }
 
     public List<Post> getBoardList() {
-        return boardDao.getPostList();
+        return boardRepository.getPostList();
     }
 
-//    public void registerPost(Post post) {
-//        boardDao.insertPost(post);
-//    }
+    public ResponseEntity<?> registerPost(Post post, Session session) {
+        Member loginUser = (Member) session.getAttribute("loginUser");
+        if (loginUser == null) return ResponseEntity.of(HttpStatus.UNAUTHORIZED, null);
+        post.setWriter(loginUser);
+        boardRepository.registerPost(post);
+        return ResponseEntity.of(HttpStatus.CREATED, null);
+    }
 }

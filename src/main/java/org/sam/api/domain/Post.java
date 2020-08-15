@@ -12,7 +12,7 @@ public class Post {
     private Long id;
     private String title;
     private String content;
-    private String writer;
+    private Member writer;
     private Date regDate;
 
     public Long getId() {
@@ -39,11 +39,11 @@ public class Post {
         this.content = content;
     }
 
-    public String getWriter() {
+    public Member getWriter() {
         return writer;
     }
 
-    public void setWriter(String writer) {
+    public void setWriter(Member writer) {
         this.writer = writer;
     }
 

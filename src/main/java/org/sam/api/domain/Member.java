@@ -1,5 +1,7 @@
 package org.sam.api.domain;
 
+import org.sam.api.payload.JoinReqeust;
+
 /**
  * Created by melchor
  * Date: 2020/08/11
@@ -14,6 +16,11 @@ public class Member {
 
     public Long getId() {
         return id;
+    }
+
+    public static Member create(JoinReqeust reqeust) {
+        Member member = new Member();
+        return  member;
     }
 
     public void setId(Long id) {
