@@ -21,10 +21,10 @@ public class BoardService {
     }
 
     public List<Post> getBoardList() {
-        return boardDao.selectBoardList();
+        return boardDao.getPostList();
     }
 
-    public void registerPost(Post post) {
-        boardDao.insertPost(post);
-    }
+//    public void registerPost(Post post) {
+//        boardDao.insertPost(post);
+//    }
 }

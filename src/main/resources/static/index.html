@@ -4,29 +4,73 @@
     <meta charset="UTF-8">
     <title>Sample Board</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
 <body>
+<style>
+    ul {
+        list-style: none;
+    }
+</style>
 <div id="app">
-    <insert-form></insert-form>
-    <board-detail></board-detail>
-    <board-list></board-list>
+    <router-link to="/board">게시판</router-link>
+    <router-view></router-view>
 </div>
 <script type="text/javascript">
-    Vue.component('insert-form', {
+    const InsertForm = Vue.component('insert-form', {
         template: '<div>insert form</div>'
     });
-    Vue.component('board-list', {
-        template: '<div>board-list</div>'
+    const BoardList = Vue.component('board-list', {
+        template:
+            `
+            <section>
+                <h1>board-list</h1>
+                <ul>
+                    <li></li>
+                    <li is="board-item" v-for="(post, index) in postList" :post="post" :key="index"></li>
+                </ul>
+           </section>`,
+        created() {
+            fetch('/board')
+                .then((res) => res.json())
+                .then((data) => this.postList = data);
+        },
+        data() {
+            return {
+                postList: [],
+            }
+        }
     });
-    Vue.component('board-detail', {
-        template: '<div>board-detail</div>'
+
+    const BoardDetail = Vue.component('board-detail', {
+        template: '<h1>글 목록</h1>'
     });
+
+     Vue.component('board-item', {
+        template: `
+            <li>
+                <span>{{ post.id }}</span><span>{{ post.title }}</span><span>{{ post.content }}</span>
+            </li>
+        `,
+        props: ['post'],
+    });
+
+
+    const routes = [
+        { path: '/board', component: BoardList },
+    ];
+    const router = new VueRouter({
+        routes,
+    });
+
+    
     const vm = new Vue({
         el: '#app',
+        router,
         data: {
+            postList: [],
         },
-        created() {
-        },
+
         methods: {
         }
     });

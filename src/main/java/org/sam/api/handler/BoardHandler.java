@@ -10,6 +10,7 @@ import org.sam.server.annotation.handle.RestApi;
 import org.sam.server.http.ResponseEntity;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by melchor
@@ -28,15 +29,15 @@ public class BoardHandler {
     @RestApi
     @GetHandle
     public ResponseEntity<?> getPostList() {
-//        List<Post> postList = boardService.getBoardList();
-        return ResponseEntity.ok(null);
+        List<Post> postList = boardService.getBoardList();
+        return ResponseEntity.ok(postList);
     }
 
-    @RestApi
-    @PostHandle
-    public ResponseEntity<Object> registerPost(@JsonRequest Post post) throws IOException {
-        boardService.registerPost(post);
-        return ResponseEntity.ok(null);
-    }
+//    @RestApi
+//    @PostHandle
+//    public ResponseEntity<Object> registerPost(@JsonRequest Post post) throws IOException {
+//        boardService.registerPost(post);
+//        return ResponseEntity.ok(null);
+//    }
 
 }
