@@ -1,12 +1,8 @@
 package org.sam.api.service;
 
-import org.sam.api.domain.Member;
 import org.sam.api.domain.Post;
 import org.sam.api.repositoty.BoardRepository;
 import org.sam.server.annotation.component.Service;
-import org.sam.server.constant.HttpStatus;
-import org.sam.server.http.ResponseEntity;
-import org.sam.server.http.Session;
 
 import java.util.List;
 
@@ -28,12 +24,8 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
-    public ResponseEntity<?> registerPost(Post post, Session session) {
-        Member loginUser = (Member) session.getAttribute("loginUser");
-        if (loginUser == null) return ResponseEntity.of(HttpStatus.UNAUTHORIZED, null);
-        post.setWriter(loginUser);
+    public void registerPost(Post post) {
         boardRepository.registerPost(post);
-        return ResponseEntity.of(HttpStatus.CREATED, null);
     }
 
     public Post getPostDetail(Long id) {

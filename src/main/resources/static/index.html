@@ -46,9 +46,9 @@
 
     const BoardDetail = Vue.component('board-detail', {
         template:
-            `<div><h1>{{ post.title }}</h1>
+            `<div><h1>{{ postDetail.title }}</h1>
              <section>
-                {{ post.content }}
+                {{ postDetail.content }}
              </section>
             </div>
             `,
@@ -58,7 +58,7 @@
             }
         },
         created() {
-            fetch('/board')
+            fetch('/board/' + 1)
             .then((res) => res.json())
             .then((data) => this.postDetail = data);
         }
@@ -74,7 +74,6 @@
          methods: {
             viewDetail(id) {
                 router.push({ path: 'board/:id',  params: { id }});
-                console.log(11);
             }
          }
     });

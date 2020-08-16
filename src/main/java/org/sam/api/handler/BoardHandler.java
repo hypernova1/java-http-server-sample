@@ -1,12 +1,15 @@
 package org.sam.api.handler;
 
+import org.sam.api.domain.Member;
 import org.sam.api.domain.Post;
 import org.sam.api.service.BoardService;
 import org.sam.server.annotation.component.Handler;
-import org.sam.server.annotation.handle.GetHandle;
-import org.sam.server.annotation.handle.RestApi;
+import org.sam.server.annotation.handle.*;
+import org.sam.server.constant.HttpStatus;
 import org.sam.server.http.ResponseEntity;
+import org.sam.server.http.Session;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -32,17 +35,20 @@ public class BoardHandler {
 
     @RestApi
     @GetHandle("/{id}")
-    public ResponseEntity<?> getPostDetail(Long id) {
+    public ResponseEntity<?> getPostDetail(@PathValue Long id) {
         Post post = boardService.getPostDetail(id);
         if (post == null) return ResponseEntity.notFound(null);
         return ResponseEntity.ok(post);
     }
 
-//    @RestApi
-//    @PostHandle
-//    public ResponseEntity<Object> registerPost(@JsonRequest Post post) throws IOException {
-//        boardService.registerPost(post);
-//        return ResponseEntity.ok(null);
-//    }
+    @RestApi
+    @PostHandle
+    public ResponseEntity<Object> registerPost(@JsonRequest Post post, Session session) throws IOException {
+        Member loginUser = (Member) session.getAttribute("loginUser");
+        if (loginUser == null) return ResponseEntity.of(HttpStatus.UNAUTHORIZED, null);
+        post.setWriter(loginUser);
+        boardService.registerPost(post);
+        return ResponseEntity.of(HttpStatus.CREATED, null);
+    }
 
 }

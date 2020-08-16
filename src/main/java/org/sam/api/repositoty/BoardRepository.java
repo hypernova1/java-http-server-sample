@@ -2,6 +2,7 @@ package org.sam.api.repositoty;
 
 import org.sam.api.domain.Post;
 import org.sam.server.annotation.component.Component;
+import org.sam.server.annotation.component.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.stream.Stream;
  * Date: 2020/08/11
  * Time: 8:33 PM
  */
-@Component
+@Repository
 public class BoardRepository {
 
     List<Post> postList = new ArrayList<>();

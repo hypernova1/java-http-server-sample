@@ -1,12 +1,12 @@
 package org.sam.api.repositoty;
 
 import org.sam.api.domain.Member;
-import org.sam.server.annotation.component.Component;
+import org.sam.server.annotation.component.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Repository
 public class MemberRepository {
 
     private Long id = 1L;
