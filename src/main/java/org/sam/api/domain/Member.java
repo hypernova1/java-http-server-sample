@@ -1,6 +1,6 @@
 package org.sam.api.domain;
 
-import org.sam.api.payload.JoinReqeust;
+import org.sam.api.payload.JoinRequest;
 
 /**
  * Created by melchor
@@ -18,8 +18,11 @@ public class Member {
         return id;
     }
 
-    public static Member create(JoinReqeust reqeust) {
+    public static Member create(JoinRequest request) {
         Member member = new Member();
+        member.setEmail(request.getEmail());
+        member.setName(request.getName());
+        member.setPassword(request.getPassword());
         return  member;
     }
 

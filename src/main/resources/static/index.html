@@ -39,25 +39,50 @@
             return {
                 postList: [],
             }
+        },
+        methods: {
         }
     });
 
     const BoardDetail = Vue.component('board-detail', {
-        template: '<h1>글 목록</h1>'
+        template:
+            `<div><h1>{{ post.title }}</h1>
+             <section>
+                {{ post.content }}
+             </section>
+            </div>
+            `,
+        data() {
+            return {
+                postDetail: {},
+            }
+        },
+        created() {
+            fetch('/board')
+            .then((res) => res.json())
+            .then((data) => this.postDetail = data);
+        }
     });
 
      Vue.component('board-item', {
-        template: `
+         template: `
             <li>
-                <span>{{ post.id }}</span><span>{{ post.title }}</span><span>{{ post.content }}</span>
-            </li>
-        `,
-        props: ['post'],
+                <span>{{ post.id }}</span><a @click="viewDetail(post.id)">{{ post.title }}</a><span>{{ post.content }}</span>
+            </li>`
+         ,
+         props: ['post'],
+         methods: {
+            viewDetail(id) {
+                router.push({ path: 'board/:id',  params: { id }});
+                console.log(11);
+            }
+         }
     });
 
 
     const routes = [
         { path: '/board', component: BoardList },
+        { path: '/board/:id', component: BoardDetail },
     ];
     const router = new VueRouter({
         routes,

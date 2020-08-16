@@ -24,8 +24,8 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-    public List<Post> getBoardList() {
-        return boardRepository.getPostList();
+    public List<Post> getPostList() {
+        return boardRepository.findAll();
     }
 
     public ResponseEntity<?> registerPost(Post post, Session session) {
@@ -34,5 +34,9 @@ public class BoardService {
         post.setWriter(loginUser);
         boardRepository.registerPost(post);
         return ResponseEntity.of(HttpStatus.CREATED, null);
+    }
+
+    public Post getPostDetail(Long id) {
+        return boardRepository.findById(id);
     }
 }

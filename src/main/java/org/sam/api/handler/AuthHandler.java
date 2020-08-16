@@ -1,10 +1,10 @@
 package org.sam.api.handler;
 
-import org.sam.api.domain.Post;
-import org.sam.api.payload.JoinReqeust;
+import org.sam.api.payload.JoinRequest;
 import org.sam.api.payload.LoginRequest;
 import org.sam.api.service.AuthService;
 import org.sam.server.annotation.component.Handler;
+import org.sam.server.annotation.handle.GetHandle;
 import org.sam.server.annotation.handle.JsonRequest;
 import org.sam.server.annotation.handle.PostHandle;
 import org.sam.server.constant.HttpStatus;
@@ -32,8 +32,16 @@ public class AuthHandler {
     }
 
     @PostHandle("/join")
-    public ResponseEntity<?> join(@JsonRequest JoinReqeust request) {
-        authService.join(request);
+    public ResponseEntity<?> join(@JsonRequest JoinRequest request) {
+        boolean result = authService.join(request);
+        if (!result) return ResponseEntity.badRequest(null);
+        return ResponseEntity.of(HttpStatus.CREATED, null);
+    }
+
+    @GetHandle("/check-email")
+    public ResponseEntity<?> checkEmail(@JsonRequest String email) {
+        boolean result = authService.isAvailableEmail(email);
+        if (!result) return ResponseEntity.badRequest(null);
         return ResponseEntity.ok(null);
     }
 

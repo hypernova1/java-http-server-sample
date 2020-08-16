@@ -29,11 +29,15 @@ public class BoardRepository {
         }
     }
 
-    public List<Post> getPostList() {
+    public List<Post> findAll() {
         return postList;
     }
 
     public void registerPost(Post post) {
         this.postList.add(post);
+    }
+
+    public Post findById(Long id) {
+        return postList.stream().filter(post -> post.getId().equals(id)).findFirst().get();
     }
 }

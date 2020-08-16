@@ -1,12 +1,10 @@
 package org.sam.api.service;
 
 import org.sam.api.domain.Member;
-import org.sam.api.payload.JoinReqeust;
+import org.sam.api.payload.JoinRequest;
 import org.sam.api.payload.LoginRequest;
 import org.sam.api.repositoty.MemberRepository;
 import org.sam.server.annotation.component.Service;
-
-import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -23,8 +21,16 @@ public class AuthService {
         return request.getPassword().equals(member.getPassword());
     }
 
-    public void join(JoinReqeust request) {
+    public boolean join(JoinRequest request) {
+        boolean availableEmail = isAvailableEmail(request.getEmail());
+        if (!availableEmail) return false;
         Member member = Member.create(request);
         memberRepository.save(member);
+        return true;
+    }
+
+    public boolean isAvailableEmail(String email) {
+        Member member = memberRepository.findByEmail(email);
+        return member == null;
     }
 }

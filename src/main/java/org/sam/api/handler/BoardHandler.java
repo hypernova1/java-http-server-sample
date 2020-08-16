@@ -4,12 +4,9 @@ import org.sam.api.domain.Post;
 import org.sam.api.service.BoardService;
 import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.GetHandle;
-import org.sam.server.annotation.handle.JsonRequest;
-import org.sam.server.annotation.handle.PostHandle;
 import org.sam.server.annotation.handle.RestApi;
 import org.sam.server.http.ResponseEntity;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -29,8 +26,16 @@ public class BoardHandler {
     @RestApi
     @GetHandle
     public ResponseEntity<?> getPostList() {
-        List<Post> postList = boardService.getBoardList();
+        List<Post> postList = boardService.getPostList();
         return ResponseEntity.ok(postList);
+    }
+
+    @RestApi
+    @GetHandle("/{id}")
+    public ResponseEntity<?> getPostDetail(Long id) {
+        Post post = boardService.getPostDetail(id);
+        if (post == null) return ResponseEntity.notFound(null);
+        return ResponseEntity.ok(post);
     }
 
 //    @RestApi
