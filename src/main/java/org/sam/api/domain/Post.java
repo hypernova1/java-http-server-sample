@@ -1,6 +1,6 @@
 package org.sam.api.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by melchor
@@ -13,7 +13,7 @@ public class Post {
     private String title;
     private String content;
     private Member writer;
-    private Date regDate;
+    private LocalDateTime regDate;
 
     public Long getId() {
         return id;
@@ -47,11 +47,11 @@ public class Post {
         this.writer = writer;
     }
 
-    public Date getRegDate() {
+    public LocalDateTime getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(Date regDate) {
+    public void setRegDate(LocalDateTime regDate) {
         this.regDate = regDate;
     }
 }

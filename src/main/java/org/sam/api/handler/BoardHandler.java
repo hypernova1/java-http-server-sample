@@ -3,6 +3,7 @@ package org.sam.api.handler;
 import org.sam.api.domain.LoginUser;
 import org.sam.api.domain.Member;
 import org.sam.api.domain.Post;
+import org.sam.api.payload.BoardDto;
 import org.sam.api.service.BoardService;
 import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
@@ -32,14 +33,14 @@ public class BoardHandler {
     @RestApi
     @GetHandle
     public ResponseEntity<?> getPostList() {
-        List<Post> postList = boardService.getPostList();
+        List<BoardDto.ListResponse> postList = boardService.getPostList();
         return ResponseEntity.ok(postList);
     }
 
     @RestApi
     @GetHandle("/{id}")
     public ResponseEntity<?> getPostDetail(@PathValue Long id) {
-        Post post = boardService.getPostDetail(id);
+        BoardDto.DetailResponse post = boardService.getPostDetail(id);
         if (post == null) return ResponseEntity.notFound(null);
         return ResponseEntity.ok(post);
     }

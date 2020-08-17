@@ -1,8 +1,10 @@
 package org.sam.api.repositoty;
 
+import org.sam.api.domain.Member;
 import org.sam.api.domain.Post;
 import org.sam.server.annotation.component.Repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +20,16 @@ public class BoardRepository {
     List<Post> postList = new ArrayList<>();
 
     {
+        Member member = new Member();
+        member.setEmail("tester@test.com");
+        member.setName("tester");
         for (int i = 0; i < 10; i++) {
             Post post = new Post();
             post.setId(id++);
             post.setTitle("Sample Post" + i);
-            post.setContent("Sample 입니다.");
+            post.setWriter(member);
+            post.setContent("Sample Content.");
+            post.setRegDate(LocalDateTime.now());
             postList.add(post);
         }
     }

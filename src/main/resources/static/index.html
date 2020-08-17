@@ -21,10 +21,10 @@
     }
 </style>
 <div id="app">
-    <router-link to="/board">게시판</router-link>
-    <router-link to="/sign-up" v-if="loginUser === null">회원 가입</router-link>
-    <router-link to="/sign-in" v-if="loginUser === null">로그인</router-link>
-    <a @click="signOut" v-if="loginUser !== null">로그아웃</a>
+    <router-link to="/board">board</router-link>
+    <router-link to="/sign-up" v-if="loginUser === null">sign-up</router-link>
+    <router-link to="/sign-in" v-if="loginUser === null">sign-in</router-link>
+    <a @click="signOut" v-if="loginUser !== null">sign-out</a>
     <router-view></router-view>
 </div>
 <script src="/resources/js/board/detail.js"></script>

@@ -27,6 +27,14 @@ const BoardInsertForm = Vue.component('board-insert-form', {
     },
     methods: {
         registerPost() {
+            if (this.form.title.length === 0) {
+                alert('title cannot be empty.');
+                return;
+            }
+            if (this.form.content.length === 0) {
+                alert('content cannot be empty.');
+                return;
+            }
             fetch('/board', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

@@ -2,11 +2,16 @@ const BoardList = Vue.component('board-list', {
     template: `
             <section>
                 <h1>board-list</h1>
-                <ul>
-                    <li></li>
-                    <li is="board-item" v-for="(post, index) in postList" :post="post" :key="index"></li>
-                </ul>
-                <router-link to="/board/new">글쓰기</router-link>
+                <table>
+                    <tr>
+                        <th>no</th>
+                        <th>title</th>
+                        <th>writer</th>
+                        <th>register date</th>
+                    </tr>
+                    <tr is="board-item" v-for="(post, index) in postList" :post="post" :key="index"></tr>
+                </table>
+                <router-link to="/board/new">write</router-link>
            </section>`,
     created() {
         fetch('/board')

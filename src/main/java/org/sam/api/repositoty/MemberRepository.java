@@ -3,6 +3,7 @@ package org.sam.api.repositoty;
 import org.sam.api.domain.Member;
 import org.sam.server.annotation.component.Repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,7 @@ public class MemberRepository {
         admin.setEmail("admin@co.kr");
         admin.setPassword("1111");
         admin.setName("admin");
+        admin.setRegDate(LocalDateTime.now());
         memberList.add(admin);
     }
 

@@ -40,25 +40,25 @@ const SignUpForm = Vue.component('sign-up-form', {
                     this.validate.email = true;
                 })
                 .catch(() => {
-                    alert('이미 존재하는 이메일입니다.')
+                    alert('email already exist.')
                     this.validate.email = false;
                 });
         },
         signUp() {
             if (this.form.email.length === 0) {
-                alert('이메일을 입력해주세요.');
+                alert('email cannot be empty.');
                 return;
             }
             if (!this.validate.email) {
-                alert('이미 존재하는 이메일입니다.');
+                alert('email already exist.');
                 return;
             }
             if (this.form.name.length === 0) {
-                alert('이름을 입력해주세요.');
+                alert('name cannot be empty.');
                 return;
             }
             if (this.form.password.length === 0) {
-                alert('비밀번호를 입력해주세요.');
+                alert('password cannot be empty.');
                 return;
             }
             fetch('/auth/join', {
@@ -67,7 +67,7 @@ const SignUpForm = Vue.component('sign-up-form', {
                 body: JSON.stringify(this.form),
             }).then((res) => res.json())
                 .then(() => {
-                    alert('가입이 완료되었습니다.');
+                    alert('sign-up success!');
                     router.push("/");
                 })
                 .catch((err) => alert(err));

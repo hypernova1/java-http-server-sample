@@ -1,8 +1,11 @@
 Vue.component('board-item', {
     template: `
-            <li>
-                <span>{{ post.id }}</span><a @click="viewDetail(post.id)">{{ post.title }}</a><span>{{ post.content }}</span>
-            </li>`
+            <tr>
+                <td>{{ post.id }}</td>
+                <td><a @click="viewDetail(post.id)">{{ post.title }}</a></td>
+                <td>{{ post.writer }}</td>
+                <td>{{ post.regDate }}</td>
+            </tr>`
     ,
     props: ['post'],
     methods: {
