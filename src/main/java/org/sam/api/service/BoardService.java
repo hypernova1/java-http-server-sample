@@ -24,8 +24,9 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
-    public void registerPost(Post post) {
-        boardRepository.registerPost(post);
+    public Long registerPost(Post post) {
+        Post savedPost = boardRepository.save(post);
+        return savedPost.getId();
     }
 
     public Post getPostDetail(Long id) {

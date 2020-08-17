@@ -15,22 +15,24 @@ public class AuthService {
         this.memberRepository = memberRepository;
     }
 
-    public boolean login(LoginRequest request) {
-        Member member = memberRepository.findByEmail(request.getEmail());
-        if (member == null) return false;
-        return request.getPassword().equals(member.getPassword());
+    public Member login(LoginRequest request) {
+        Member member = memberRepository.findByEmail(request.getEmail()).orElse(null);
+        if (member == null) return null;
+        boolean result = request.getPassword().equals(member.getPassword());
+        if (!result) return null;
+        return member;
     }
 
     public boolean join(JoinRequest request) {
         boolean availableEmail = isAvailableEmail(request.getEmail());
         if (!availableEmail) return false;
         Member member = Member.create(request);
-        memberRepository.save(member);
+        Member save = memberRepository.save(member);
         return true;
     }
 
     public boolean isAvailableEmail(String email) {
-        Member member = memberRepository.findByEmail(email);
+        Member member = memberRepository.findByEmail(email).orElse(null);
         return member == null;
     }
 }

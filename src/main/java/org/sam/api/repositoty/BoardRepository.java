@@ -1,14 +1,10 @@
 package org.sam.api.repositoty;
 
 import org.sam.api.domain.Post;
-import org.sam.server.annotation.component.Component;
 import org.sam.server.annotation.component.Repository;
 
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Created by melchor
@@ -18,12 +14,13 @@ import java.util.stream.Stream;
 @Repository
 public class BoardRepository {
 
+    private Long id = 1L;
     List<Post> postList = new ArrayList<>();
 
     {
         for (int i = 0; i < 10; i++) {
             Post post = new Post();
-            post.setId(i + 1L);
+            post.setId(id++);
             post.setTitle("Sample Post" + i);
             post.setContent("Sample 입니다.");
             postList.add(post);
@@ -34,11 +31,13 @@ public class BoardRepository {
         return postList;
     }
 
-    public void registerPost(Post post) {
+    public Post save(Post post) {
+        post.setId(id++);
         this.postList.add(post);
+        return post;
     }
 
     public Post findById(Long id) {
-        return postList.stream().filter(post -> post.getId().equals(id)).findFirst().get();
+        return postList.stream().filter(post -> post.getId().equals(id)).findFirst().orElse(null);
     }
 }

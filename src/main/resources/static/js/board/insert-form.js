@@ -1,0 +1,40 @@
+const BoardInsertForm = Vue.component('board-insert-form', {
+    template: `
+            <div>
+                <h1>insert form</h1>
+                <div>
+                    <label for="title">title: 
+                        <input type="text" name="title" v-model="form.title">
+                    </label>
+                </div>
+                <div>
+                    <label for="content">content: 
+                        <textarea name="content" v-model="form.content"></textarea>
+                    </label>
+                </div>
+                <button @click="registerPost">submit</button>
+            </div>`,
+    created() {
+        console.log(1);
+    },
+    data() {
+        return {
+            form: {
+                title: '',
+                content: '',
+            }
+        }
+    },
+    methods: {
+        registerPost() {
+            fetch('/board', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.form),
+            }).then((res) => res.json())
+                .then((data) => {
+                    router.push(`/board/${data}`);
+                }).catch((err) => alert(err));
+        }
+    }
+});

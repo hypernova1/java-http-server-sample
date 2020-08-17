@@ -11,92 +11,59 @@
     ul {
         list-style: none;
     }
+    .router-link-active {
+        color: white;
+        background-color: red;
+    }
+    .router-link-exact-active {
+        color: white;
+        background-color: darkgrey;
+    }
 </style>
 <div id="app">
     <router-link to="/board">게시판</router-link>
+    <router-link to="/sign-up" v-if="loginUser === null">회원 가입</router-link>
+    <router-link to="/sign-in" v-if="loginUser === null">로그인</router-link>
+    <a @click="signOut" v-if="loginUser !== null">로그아웃</a>
     <router-view></router-view>
 </div>
+<script src="/resources/js/board/detail.js"></script>
+<script src="/resources/js/board/insert-form.js"></script>
+<script src="/resources/js/board/list.js"></script>
+<script src="/resources/js/board/item.js"></script>
+<script src="/resources/js/auth/sign-up.js"></script>
+<script src="/resources/js/auth/sign-in.js"></script>
 <script type="text/javascript">
-    const InsertForm = Vue.component('insert-form', {
-        template: '<div>insert form</div>'
-    });
-    const BoardList = Vue.component('board-list', {
-        template:
-            `
-            <section>
-                <h1>board-list</h1>
-                <ul>
-                    <li></li>
-                    <li is="board-item" v-for="(post, index) in postList" :post="post" :key="index"></li>
-                </ul>
-           </section>`,
-        created() {
-            fetch('/board')
-                .then((res) => res.json())
-                .then((data) => this.postList = data);
-        },
-        data() {
-            return {
-                postList: [],
-            }
-        },
-        methods: {
-        }
-    });
-
-    const BoardDetail = Vue.component('board-detail', {
-        template:
-            `<div><h1>{{ postDetail.title }}</h1>
-             <section>
-                {{ postDetail.content }}
-             </section>
-            </div>
-            `,
-        data() {
-            return {
-                postDetail: {},
-            }
-        },
-        created() {
-            fetch('/board/' + 1)
-            .then((res) => res.json())
-            .then((data) => this.postDetail = data);
-        }
-    });
-
-     Vue.component('board-item', {
-         template: `
-            <li>
-                <span>{{ post.id }}</span><a @click="viewDetail(post.id)">{{ post.title }}</a><span>{{ post.content }}</span>
-            </li>`
-         ,
-         props: ['post'],
-         methods: {
-            viewDetail(id) {
-                router.push({ path: 'board/:id',  params: { id }});
-            }
-         }
-    });
-
 
     const routes = [
-        { path: '/board', component: BoardList },
+        { path: '/board', component: BoardList, props: true },
+        { path: '/board/new', component: BoardInsertForm },
         { path: '/board/:id', component: BoardDetail },
+        { path: '/sign-up', component: SignUpForm },
+        { path: '/sign-in', component: SignInForm },
     ];
+
     const router = new VueRouter({
         routes,
     });
-
     
     const vm = new Vue({
         el: '#app',
         router,
         data: {
             postList: [],
+            loginUser: null,
         },
-
         methods: {
-        }
+            signOut() {
+                fetch(`/auth/logout`)
+                .then((res) => res.json())
+                .then((data) => {
+                    alert('로그아웃 되었습니다.');
+                    this.loginUser = null;
+                })
+            }
+        },
     });
 </script>
 </body>

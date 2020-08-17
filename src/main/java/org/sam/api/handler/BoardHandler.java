@@ -1,5 +1,6 @@
 package org.sam.api.handler;
 
+import org.sam.api.domain.LoginUser;
 import org.sam.api.domain.Member;
 import org.sam.api.domain.Post;
 import org.sam.api.service.BoardService;
@@ -21,9 +22,11 @@ import java.util.List;
 public class BoardHandler {
 
     private final BoardService boardService;
+    private final MemberService memberService;
 
-    public BoardHandler(BoardService boardService) {
+    public BoardHandler(BoardService boardService, MemberService memberService) {
         this.boardService = boardService;
+        this.memberService = memberService;
     }
 
     @RestApi
@@ -44,11 +47,12 @@ public class BoardHandler {
     @RestApi
     @PostHandle
     public ResponseEntity<Object> registerPost(@JsonRequest Post post, Session session) throws IOException {
-        Member loginUser = (Member) session.getAttribute("loginUser");
+        LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
         if (loginUser == null) return ResponseEntity.of(HttpStatus.UNAUTHORIZED, null);
-        post.setWriter(loginUser);
-        boardService.registerPost(post);
-        return ResponseEntity.of(HttpStatus.CREATED, null);
+        Member member = memberService.getMemberInfo(loginUser.getId());
+        post.setWriter(member);
+        Long postId = boardService.registerPost(post);
+        return ResponseEntity.of(HttpStatus.CREATED, postId);
     }
 
 }

@@ -5,6 +5,7 @@ import org.sam.server.annotation.component.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class MemberRepository {
@@ -21,13 +22,18 @@ public class MemberRepository {
         memberList.add(admin);
     }
 
-    public Member findByEmail(String email) {
+    public Optional<Member> findByEmail(String email) {
         return memberList.stream()
-                .filter(member -> member.getEmail().equals(email)).findFirst().get();
+                .filter(member -> member.getEmail().equals(email)).findFirst();
     }
 
-    public void save(Member member) {
+    public Member save(Member member) {
         member.setId(this.id++);
         memberList.add(member);
+        return member;
+    }
+
+    public Optional<Member> findById(Long id) {
+        return memberList.stream().filter(member -> member.getId().equals(id)).findFirst();
     }
 }
