@@ -2,7 +2,7 @@ Vue.component('board-item', {
     template: `
             <tr>
                 <td>{{ post.id }}</td>
-                <td><a @click="viewDetail(post.id)">{{ post.title }}</a></td>
+                <td><a href="#" @click="viewDetail(post.id)">{{ post.title }}</a></td>
                 <td>{{ post.writer }}</td>
                 <td>{{ post.regDate }}</td>
             </tr>`

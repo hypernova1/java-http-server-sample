@@ -11,16 +11,25 @@ const BoardList = Vue.component('board-list', {
                     </tr>
                     <tr is="board-item" v-for="(post, index) in postList" :post="post" :key="index"></tr>
                 </table>
-                <router-link to="/board/new">write</router-link>
+                <a href="#" @click="goWriterPage">write</a>
            </section>`,
-    created() {
-        fetch('/board')
-            .then((res) => res.json())
-            .then((data) => this.postList = data);
-    },
     data() {
         return {
             postList: [],
         }
     },
+    created() {
+        fetch('/board')
+            .then((res) => res.json())
+            .then((data) => this.postList = data);
+    },
+    methods: {
+        goWriterPage() {
+            if (vm.loginUser === null) {
+                alert('login please..');
+                return;
+            }
+            router.push('/board/new');
+        }
+    }
 });

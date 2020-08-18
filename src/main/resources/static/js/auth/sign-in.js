@@ -28,11 +28,11 @@ const SignInForm = Vue.component('sign-in-form', {
     methods: {
         signIn() {
             if (this.form.email.length === 0) {
-                alert('이메일을 입력해주세요.');
+                alert('email cannot be empty.');
                 return;
             }
             if (this.form.password.length === 0) {
-                alert('비밀번호를 입력해주세요.');
+                alert('password cannot be empty.');
                 return;
             }
             fetch('/auth/login', {
@@ -46,7 +46,7 @@ const SignInForm = Vue.component('sign-in-form', {
                 return res.json()
             })
                 .then((data) => {
-                    alert('로그인 되었습니다.');
+                    alert('sign-in succeed.');
                     vm.loginUser = data;
                     router.push("/");
                 })
