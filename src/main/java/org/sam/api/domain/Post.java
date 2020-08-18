@@ -1,6 +1,6 @@
 package org.sam.api.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by melchor
@@ -12,8 +12,8 @@ public class Post {
     private Long id;
     private String title;
     private String content;
-    private String writer;
-    private Date regDate;
+    private Member writer;
+    private LocalDateTime regDate;
 
     public Long getId() {
         return id;
@@ -39,19 +39,19 @@ public class Post {
         this.content = content;
     }
 
-    public String getWriter() {
+    public Member getWriter() {
         return writer;
     }
 
-    public void setWriter(String writer) {
+    public void setWriter(Member writer) {
         this.writer = writer;
     }
 
-    public Date getRegDate() {
+    public LocalDateTime getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(Date regDate) {
+    public void setRegDate(LocalDateTime regDate) {
         this.regDate = regDate;
     }
 }

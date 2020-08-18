@@ -1,5 +1,9 @@
 package org.sam.api.domain;
 
+import org.sam.api.payload.JoinRequest;
+
+import java.time.LocalDateTime;
+
 /**
  * Created by melchor
  * Date: 2020/08/11
@@ -11,9 +15,19 @@ public class Member {
     private String email;
     private String name;
     private String password;
+    private LocalDateTime regDate;
 
     public Long getId() {
         return id;
+    }
+
+    public static Member create(JoinRequest request) {
+        Member member = new Member();
+        member.setEmail(request.getEmail());
+        member.setName(request.getName());
+        member.setPassword(request.getPassword());
+        member.setRegDate(LocalDateTime.now());
+        return  member;
     }
 
     public void setId(Long id) {
@@ -42,5 +56,13 @@ public class Member {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public LocalDateTime getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(LocalDateTime regDate) {
+        this.regDate = regDate;
     }
 }

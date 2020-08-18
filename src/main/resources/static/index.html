@@ -4,31 +4,66 @@
     <meta charset="UTF-8">
     <title>Sample Board</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 </head>
 <body>
+<style>
+    ul {
+        list-style: none;
+    }
+    .router-link-active {
+        color: white;
+        background-color: red;
+    }
+    .router-link-exact-active {
+        color: white;
+        background-color: darkgrey;
+    }
+</style>
 <div id="app">
-    <insert-form></insert-form>
-    <board-detail></board-detail>
-    <board-list></board-list>
+    <router-link to="/board">board</router-link>
+    <router-link to="/sign-up" v-if="loginUser === null">sign-up</router-link>
+    <router-link to="/sign-in" v-if="loginUser === null">sign-in</router-link>
+    <a href="#" @click="signOut" v-if="loginUser !== null">sign-out</a>
+    <router-view></router-view>
 </div>
+<script src="/resources/js/board/detail.js"></script>
+<script src="/resources/js/board/insert-form.js"></script>
+<script src="/resources/js/board/list.js"></script>
+<script src="/resources/js/board/item.js"></script>
+<script src="/resources/js/auth/sign-up.js"></script>
+<script src="/resources/js/auth/sign-in.js"></script>
 <script type="text/javascript">
-    Vue.component('insert-form', {
-        template: '<div>insert form</div>'
+
+    const routes = [
+        { path: '/board', component: BoardList, props: true },
+        { path: '/board/new', component: BoardInsertForm },
+        { path: '/board/:id', component: BoardDetail },
+        { path: '/sign-up', component: SignUpForm },
+        { path: '/sign-in', component: SignInForm },
+    ];
+
+    const router = new VueRouter({
+        routes,
     });
-    Vue.component('board-list', {
-        template: '<div>board-list</div>'
-    });
-    Vue.component('board-detail', {
-        template: '<div>board-detail</div>'
-    });
+    
     const vm = new Vue({
         el: '#app',
+        router,
         data: {
-        },
-        created() {
+            postList: [],
+            loginUser: null,
         },
         methods: {
-        }
+            signOut() {
+                fetch(`/auth/logout`)
+                .then((res) => res.json())
+                .then((data) => {
+                    alert('로그아웃 되었습니다.');
+                    this.loginUser = null;
+                })
+            }
+        },
     });
 </script>
 </body>
