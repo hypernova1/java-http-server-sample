@@ -21,7 +21,7 @@ const vm = new Vue({
             fetch(`/auth/logout`)
                 .then((res) => res.json())
                 .then(() => {
-                    alert('로그아웃 되었습니다.');
+                    alert('sign-out succeed.');
                     this.loginUser = null;
                     router.push('/');
                 })
