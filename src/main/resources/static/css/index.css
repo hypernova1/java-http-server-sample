@@ -1,0 +1,14 @@
+ul {
+    list-style: none;
+}
+.router-link-active {
+    color: white;
+    background-color: red;
+}
+.router-link-exact-active {
+    color: white;
+    background-color: darkgrey;
+}
+a {
+    cursor: pointer;
+}

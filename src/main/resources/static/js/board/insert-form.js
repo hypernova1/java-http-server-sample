@@ -13,7 +13,8 @@ const BoardInsertForm = Vue.component('board-insert-form', {
                     </label>
                 </div>
                 <button @click="registerPost">submit</button>
-            </div>`,
+            </div>
+    `,
     data() {
         return {
             form: {

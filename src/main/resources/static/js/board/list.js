@@ -11,8 +11,9 @@ const BoardList = Vue.component('board-list', {
                     </tr>
                     <tr is="board-item" v-for="(post, index) in postList" :post="post" :key="index"></tr>
                 </table>
-                <a href="#" @click="goWriterPage">write</a>
-           </section>`,
+                <a @click="goWriterPage">write</a>
+           </section>
+    `,
     data() {
         return {
             postList: [],
