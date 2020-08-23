@@ -14,7 +14,7 @@ import java.util.List;
  * Time: 8:33 PM
  */
 @Repository
-public class BoardRepository {
+public class PostRepository {
 
     private Long id = 1L;
     List<Post> postList = new ArrayList<>();

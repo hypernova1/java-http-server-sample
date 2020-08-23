@@ -3,8 +3,8 @@ package org.sam.api.handler;
 import org.sam.api.domain.LoginUser;
 import org.sam.api.domain.Member;
 import org.sam.api.domain.Post;
-import org.sam.api.payload.BoardDto;
-import org.sam.api.service.BoardService;
+import org.sam.api.payload.PostDto;
+import org.sam.api.service.PostService;
 import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
 import org.sam.server.constant.HttpStatus;
@@ -19,29 +19,31 @@ import java.util.List;
  * Date: 2020/07/17
  * Time: 2:33 PM
  */
-@Handler("/board")
-public class BoardHandler {
+@Handler("/post")
+public class PostHandler {
 
-    private final BoardService boardService;
+    private final PostService postService;
     private final MemberService memberService;
 
-    public BoardHandler(BoardService boardService, MemberService memberService) {
-        this.boardService = boardService;
+    public PostHandler(PostService postService, MemberService memberService) {
+        this.postService = postService;
         this.memberService = memberService;
     }
 
     @RestApi
     @GetHandle
     public ResponseEntity<?> getPostList() {
-        List<BoardDto.ListResponse> postList = boardService.getPostList();
+        List<PostDto.ListResponse> postList = postService.getPostList();
+
         return ResponseEntity.ok(postList);
     }
 
     @RestApi
     @GetHandle("/{id}")
     public ResponseEntity<?> getPostDetail(@PathValue Long id) {
-        BoardDto.DetailResponse post = boardService.getPostDetail(id);
+        PostDto.DetailResponse post = postService.getPostDetail(id);
         if (post == null) return ResponseEntity.notFound(null);
+
         return ResponseEntity.ok(post);
     }
 
@@ -52,8 +54,19 @@ public class BoardHandler {
         if (loginUser == null) return ResponseEntity.of(HttpStatus.UNAUTHORIZED, null);
         Member member = memberService.getMemberInfo(loginUser.getId());
         post.setWriter(member);
-        Long postId = boardService.registerPost(post);
+        Long postId = postService.registerPost(post);
+
         return ResponseEntity.of(HttpStatus.CREATED, postId);
+    }
+
+    @RestApi
+    @PutHandle("/{id}")
+    public ResponseEntity<?> updatePost(@PathValue Long id, @JsonRequest PostDto.UpdateRequest request) {
+        boolean result = postService.updatePost(id, request);
+        if (!result) return ResponseEntity.badRequest(null);
+        PostDto.DetailResponse postDetail = postService.getPostDetail(id);
+
+        return ResponseEntity.ok(postDetail);
     }
 
 }

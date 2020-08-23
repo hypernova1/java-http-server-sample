@@ -9,14 +9,14 @@ import org.sam.server.annotation.component.Service;
 @Service
 public class AuthService {
 
-    private final MemberRepository memberRepository;
+    private final MemberRepository members;
 
-    public AuthService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
+    public AuthService(MemberRepository members) {
+        this.members = members;
     }
 
     public Member login(LoginRequest request) {
-        Member member = memberRepository.findByEmail(request.getEmail()).orElse(null);
+        Member member = members.findByEmail(request.getEmail()).orElse(null);
         if (member == null) return null;
         boolean result = request.getPassword().equals(member.getPassword());
         if (!result) return null;
@@ -27,12 +27,12 @@ public class AuthService {
         boolean availableEmail = isAvailableEmail(request.getEmail());
         if (!availableEmail) return false;
         Member member = Member.create(request);
-        Member save = memberRepository.save(member);
+        members.save(member);
         return true;
     }
 
     public boolean isAvailableEmail(String email) {
-        Member member = memberRepository.findByEmail(email).orElse(null);
+        Member member = members.findByEmail(email).orElse(null);
         return member == null;
     }
 }

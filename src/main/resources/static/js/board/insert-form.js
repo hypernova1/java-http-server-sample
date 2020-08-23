@@ -33,7 +33,7 @@ const BoardInsertForm = Vue.component('board-insert-form', {
                 alert('content cannot be empty.');
                 return;
             }
-            fetch('/board', {
+            fetch('/post', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(this.form),

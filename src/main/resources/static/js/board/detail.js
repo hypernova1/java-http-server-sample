@@ -16,7 +16,7 @@ const BoardDetail = Vue.component('board-detail', {
     },
     created() {
         const postId = this.$route.params.id;
-        fetch(`/board/${postId}`)
+        fetch(`/post/${postId}`)
             .then((res) => res.json())
             .then((data) => this.postDetail = data);
     },

@@ -20,7 +20,7 @@ const BoardList = Vue.component('board-list', {
         }
     },
     created() {
-        fetch('/board')
+        fetch('/post')
             .then((res) => res.json())
             .then((data) => this.postList = data);
     },

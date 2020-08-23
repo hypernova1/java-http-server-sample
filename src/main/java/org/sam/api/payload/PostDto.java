@@ -1,6 +1,6 @@
 package org.sam.api.payload;
 
-public class BoardDto {
+public class PostDto {
 
     public static class ListResponse {
         private Long id;
@@ -86,6 +86,27 @@ public class BoardDto {
 
         public void setRegDate(String regDate) {
             this.regDate = regDate;
+        }
+    }
+
+    public static class UpdateRequest {
+        private String title;
+        private String conent;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getConent() {
+            return conent;
+        }
+
+        public void setConent(String conent) {
+            this.conent = conent;
         }
     }
 

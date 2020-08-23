@@ -1,8 +1,8 @@
 package org.sam.api.service;
 
 import org.sam.api.domain.Post;
-import org.sam.api.payload.BoardDto;
-import org.sam.api.repositoty.BoardRepository;
+import org.sam.api.payload.PostDto;
+import org.sam.api.repositoty.PostRepository;
 import org.sam.server.annotation.component.Service;
 
 import java.time.LocalDateTime;
@@ -15,40 +15,50 @@ import java.util.stream.Collectors;
  * Time: 8:34 PM
  */
 @Service
-public class BoardService {
+public class PostService {
 
-    private final BoardRepository boardRepository;
+    private final PostRepository posts;
 
-    public BoardService(BoardRepository boardRepository) {
-        this.boardRepository = boardRepository;
+    public PostService(PostRepository posts) {
+        this.posts = posts;
     }
 
-    public List<BoardDto.ListResponse> getPostList() {
-        List<Post> postList = boardRepository.findAll();
+    public List<PostDto.ListResponse> getPostList() {
+        List<Post> postList = posts.findAll();
         return postList.stream().map(post -> {
-            BoardDto.ListResponse postDto = new BoardDto.ListResponse();
+            PostDto.ListResponse postDto = new PostDto.ListResponse();
             postDto.setId(post.getId());
             postDto.setTitle(post.getTitle());
             postDto.setRegDate(post.getRegDate().toString());
             postDto.setWriter(post.getWriter().getName());
+
             return postDto;
         }).collect(Collectors.toList());
     }
 
     public Long registerPost(Post post) {
         post.setRegDate(LocalDateTime.now());
-        Post savedPost = boardRepository.save(post);
+        Post savedPost = posts.save(post);
+
         return savedPost.getId();
     }
 
-    public BoardDto.DetailResponse getPostDetail(Long id) {
-        Post savedPost = boardRepository.findById(id);
-        BoardDto.DetailResponse detailResponse = new BoardDto.DetailResponse();
+    public PostDto.DetailResponse getPostDetail(Long id) {
+        Post savedPost = posts.findById(id);
+        PostDto.DetailResponse detailResponse = new PostDto.DetailResponse();
         detailResponse.setId(savedPost.getId());
         detailResponse.setTitle(savedPost.getTitle());
         detailResponse.setContent(savedPost.getContent());
         detailResponse.setWriter(savedPost.getWriter().getName());
 
         return detailResponse;
+    }
+
+    public boolean updatePost(Long id, PostDto.UpdateRequest request) {
+        Post savedPost = posts.findById(id);
+        if (savedPost == null) return false;
+        savedPost.update(request);
+
+        return true;
     }
 }

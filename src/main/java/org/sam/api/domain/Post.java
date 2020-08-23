@@ -1,5 +1,7 @@
 package org.sam.api.domain;
 
+import org.sam.api.payload.PostDto;
+
 import java.time.LocalDateTime;
 
 /**
@@ -53,5 +55,10 @@ public class Post {
 
     public void setRegDate(LocalDateTime regDate) {
         this.regDate = regDate;
+    }
+
+    public void update(PostDto.UpdateRequest request) {
+        this.title = request.getTitle();
+        this.content = request.getConent();
     }
 }
