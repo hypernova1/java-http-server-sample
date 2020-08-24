@@ -47,4 +47,8 @@ public class PostRepository {
     public Post findById(Long id) {
         return postList.stream().filter(post -> post.getId().equals(id)).findFirst().orElse(null);
     }
+
+    public void delete(Long id) {
+        postList.removeIf(post -> post.getId().equals(id));
+    }
 }

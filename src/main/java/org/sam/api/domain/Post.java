@@ -59,6 +59,6 @@ public class Post {
 
     public void update(PostDto.UpdateRequest request) {
         this.title = request.getTitle();
-        this.content = request.getConent();
+        this.content = request.getContent();
     }
 }

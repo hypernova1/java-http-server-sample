@@ -61,4 +61,8 @@ public class PostService {
 
         return true;
     }
+
+    public void deletePost(Long id) {
+        posts.delete(id);
+    }
 }

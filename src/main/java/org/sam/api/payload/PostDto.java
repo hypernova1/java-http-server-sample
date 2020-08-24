@@ -91,7 +91,7 @@ public class PostDto {
 
     public static class UpdateRequest {
         private String title;
-        private String conent;
+        private String content;
 
         public String getTitle() {
             return title;
@@ -101,12 +101,12 @@ public class PostDto {
             this.title = title;
         }
 
-        public String getConent() {
-            return conent;
+        public String getContent() {
+            return content;
         }
 
-        public void setConent(String conent) {
-            this.conent = conent;
+        public void setContent(String content) {
+            this.content = content;
         }
     }
 

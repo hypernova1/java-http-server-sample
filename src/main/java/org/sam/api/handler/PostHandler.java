@@ -69,4 +69,11 @@ public class PostHandler {
         return ResponseEntity.ok(postDetail);
     }
 
+    @RestApi
+    @DeleteHandle("/{id}")
+    public ResponseEntity<?> deletePost(@PathValue Long id) {
+        postService.deletePost(id);
+        return ResponseEntity.ok(null);
+    }
+
 }
