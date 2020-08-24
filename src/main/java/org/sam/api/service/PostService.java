@@ -3,6 +3,7 @@ package org.sam.api.service;
 import org.sam.api.domain.Post;
 import org.sam.api.payload.PostDto;
 import org.sam.api.repositoty.PostRepository;
+import org.sam.api.util.ModelMapper;
 import org.sam.server.annotation.component.Service;
 
 import java.time.LocalDateTime;
@@ -18,22 +19,17 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository posts;
+    private final ModelMapper modelMapper;
 
-    public PostService(PostRepository posts) {
+    public PostService(PostRepository posts, ModelMapper modelMapper) {
         this.posts = posts;
+        this.modelMapper = modelMapper;
     }
 
     public List<PostDto.ListResponse> getPostList() {
         List<Post> postList = posts.findAll();
-        return postList.stream().map(post -> {
-            PostDto.ListResponse postDto = new PostDto.ListResponse();
-            postDto.setId(post.getId());
-            postDto.setTitle(post.getTitle());
-            postDto.setRegDate(post.getRegDate().toString());
-            postDto.setWriter(post.getWriter().getName());
-
-            return postDto;
-        }).collect(Collectors.toList());
+        return postList.stream()
+                .map(post -> modelMapper.convert(post, PostDto.ListResponse.class)).collect(Collectors.toList());
     }
 
     public Long registerPost(Post post) {
