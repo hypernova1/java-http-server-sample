@@ -8,6 +8,12 @@ import java.lang.reflect.Method;
 @Component
 public class ModelMapper {
 
+    private CustomModelMapper customModelMapper;
+
+    public ModelMapper(CustomModelMapper customModelMapper) {
+        this.customModelMapper = customModelMapper;
+    }
+
     public <T, U> U convert(T instance, Class<U> clazz) {
         U target = null;
         try {
@@ -28,9 +34,16 @@ public class ModelMapper {
                     Object value = declaredMethod.invoke(instance);
                     Method setter = target.getClass().getMethod("set" + propertyName, value.getClass());
                     setter.invoke(target, value);
-                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-//                    e.printStackTrace();
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException ignored) {
                 }
+            }
+        }
+        if (customModelMapper != null) {
+            try {
+                Method map = customModelMapper.getClass().getMethod("map", instance.getClass(), target.getClass());
+                map.invoke(customModelMapper, instance, target);
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
             }
         }
     }
