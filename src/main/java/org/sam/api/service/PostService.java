@@ -41,13 +41,7 @@ public class PostService {
 
     public PostDto.DetailResponse getPostDetail(Long id) {
         Post savedPost = posts.findById(id);
-        PostDto.DetailResponse detailResponse = new PostDto.DetailResponse();
-        detailResponse.setId(savedPost.getId());
-        detailResponse.setTitle(savedPost.getTitle());
-        detailResponse.setContent(savedPost.getContent());
-        detailResponse.setWriter(savedPost.getWriter().getName());
-
-        return detailResponse;
+        return modelMapper.convert(savedPost, PostDto.DetailResponse.class);
     }
 
     public boolean updatePost(Long id, PostDto.UpdateRequest request) {

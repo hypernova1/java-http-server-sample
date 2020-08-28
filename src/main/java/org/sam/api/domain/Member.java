@@ -21,15 +21,6 @@ public class Member {
         return id;
     }
 
-    public static Member create(JoinRequest request) {
-        Member member = new Member();
-        member.setEmail(request.getEmail());
-        member.setName(request.getName());
-        member.setPassword(request.getPassword());
-        member.setRegDate(LocalDateTime.now());
-        return  member;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }

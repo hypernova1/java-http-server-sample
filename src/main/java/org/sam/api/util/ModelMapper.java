@@ -42,8 +42,7 @@ public class ModelMapper {
             try {
                 Method map = customModelMapper.getClass().getMethod("map", instance.getClass(), target.getClass());
                 map.invoke(customModelMapper, instance, target);
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
             }
         }
     }

@@ -17,4 +17,9 @@ public class CustomModelMapper {
         listResponse.setRegDate(post.getRegDate().toString());
     }
 
+    public void map(Post post, PostDto.DetailResponse listResponse) {
+        listResponse.setWriter(post.getWriter().getName());
+        listResponse.setRegDate(post.getRegDate().toString());
+    }
+
 }

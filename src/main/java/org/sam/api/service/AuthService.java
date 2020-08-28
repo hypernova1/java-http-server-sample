@@ -4,15 +4,20 @@ import org.sam.api.domain.Member;
 import org.sam.api.payload.JoinRequest;
 import org.sam.api.payload.LoginRequest;
 import org.sam.api.repositoty.MemberRepository;
+import org.sam.api.util.ModelMapper;
 import org.sam.server.annotation.component.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class AuthService {
 
     private final MemberRepository members;
+    private final ModelMapper modelMapper;
 
-    public AuthService(MemberRepository members) {
+    public AuthService(MemberRepository members, ModelMapper modelMapper) {
         this.members = members;
+        this.modelMapper = modelMapper;
     }
 
     public Member login(LoginRequest request) {
@@ -26,7 +31,8 @@ public class AuthService {
     public boolean join(JoinRequest request) {
         boolean availableEmail = isAvailableEmail(request.getEmail());
         if (!availableEmail) return false;
-        Member member = Member.create(request);
+        Member member = modelMapper.convert(request, Member.class);
+        member.setRegDate(LocalDateTime.now());
         members.save(member);
         return true;
     }
