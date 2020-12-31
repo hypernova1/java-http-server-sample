@@ -1,7 +1,7 @@
 package org.sam.api;
 
 import org.sam.server.annotation.ComponentScan;
-import org.sam.server.http.HttpServer;
+import org.sam.server.http.context.HttpServer;
 
 /**
  * Created by melchor

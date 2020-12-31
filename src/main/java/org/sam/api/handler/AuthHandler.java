@@ -11,8 +11,8 @@ import org.sam.server.annotation.handle.JsonRequest;
 import org.sam.server.annotation.handle.PathValue;
 import org.sam.server.annotation.handle.PostHandle;
 import org.sam.server.constant.HttpStatus;
-import org.sam.server.http.ResponseEntity;
 import org.sam.server.http.Session;
+import org.sam.server.http.web.ResponseEntity;
 
 /**
  * Created by melchor

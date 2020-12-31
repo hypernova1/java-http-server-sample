@@ -41,6 +41,7 @@ public class PostService {
 
     public PostDto.DetailResponse getPostDetail(Long id) {
         Post savedPost = posts.findById(id);
+        if (savedPost == null) return null;
         return modelMapper.convert(savedPost, PostDto.DetailResponse.class);
     }
 
