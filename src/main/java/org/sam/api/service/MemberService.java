@@ -1,4 +1,4 @@
-package org.sam.api.handler;
+package org.sam.api.service;
 
 import org.sam.api.domain.Member;
 import org.sam.api.repositoty.MemberRepository;

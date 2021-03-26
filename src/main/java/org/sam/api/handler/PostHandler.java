@@ -4,6 +4,7 @@ import org.sam.api.domain.LoginUser;
 import org.sam.api.domain.Member;
 import org.sam.api.domain.Post;
 import org.sam.api.payload.PostDto;
+import org.sam.api.service.MemberService;
 import org.sam.api.service.PostService;
 import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
@@ -31,7 +32,7 @@ public class PostHandler {
     }
 
     @RestApi
-    @GetHandle
+    @GetMapping
     public ResponseEntity<?> getPostList() {
         List<PostDto.ListResponse> postList = postService.getPostList();
 
@@ -39,7 +40,7 @@ public class PostHandler {
     }
 
     @RestApi
-    @GetHandle("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getPostDetail(@PathValue Long id) {
         PostDto.DetailResponse post = postService.getPostDetail(id);
         if (post == null) return ResponseEntity.notFound(null);
@@ -48,7 +49,7 @@ public class PostHandler {
     }
 
     @RestApi
-    @PostHandle
+    @PostMapping
     public ResponseEntity<Object> registerPost(@JsonRequest Post post, Session session) throws IOException {
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
         if (loginUser == null) return ResponseEntity.of(HttpStatus.UNAUTHORIZED, null);
@@ -60,7 +61,7 @@ public class PostHandler {
     }
 
     @RestApi
-    @PutHandle("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updatePost(@PathValue Long id, @JsonRequest PostDto.UpdateRequest request) {
         boolean result = postService.updatePost(id, request);
         if (!result) return ResponseEntity.badRequest(null);
@@ -70,7 +71,7 @@ public class PostHandler {
     }
 
     @RestApi
-    @DeleteHandle("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePost(@PathValue Long id) {
         postService.deletePost(id);
         return ResponseEntity.ok(null);

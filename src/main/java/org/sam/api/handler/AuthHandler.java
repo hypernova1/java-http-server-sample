@@ -6,10 +6,10 @@ import org.sam.api.payload.JoinRequest;
 import org.sam.api.payload.LoginRequest;
 import org.sam.api.service.AuthService;
 import org.sam.server.annotation.component.Handler;
-import org.sam.server.annotation.handle.GetHandle;
+import org.sam.server.annotation.handle.GetMapping;
 import org.sam.server.annotation.handle.JsonRequest;
 import org.sam.server.annotation.handle.PathValue;
-import org.sam.server.annotation.handle.PostHandle;
+import org.sam.server.annotation.handle.PostMapping;
 import org.sam.server.constant.HttpStatus;
 import org.sam.server.http.Session;
 import org.sam.server.http.web.ResponseEntity;
@@ -28,7 +28,7 @@ public class AuthHandler {
         this.authService = authService;
     }
 
-    @PostHandle("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@JsonRequest LoginRequest request, Session session) {
         Member member = authService.login(request);
         if (member == null) return ResponseEntity.notFound(null);
@@ -40,21 +40,21 @@ public class AuthHandler {
         return ResponseEntity.ok(loginUser);
     }
 
-    @PostHandle("/join")
+    @PostMapping("/join")
     public ResponseEntity<?> join(@JsonRequest JoinRequest request) {
         boolean result = authService.join(request);
         if (!result) return ResponseEntity.badRequest(null);
         return ResponseEntity.of(HttpStatus.CREATED, null);
     }
 
-    @GetHandle("/check-email/{email}")
+    @GetMapping("/check-email/{email}")
     public ResponseEntity<?> checkEmail(@PathValue String email) {
         boolean result = authService.isAvailableEmail(email);
         if (!result) return ResponseEntity.badRequest(null);
         return ResponseEntity.ok(null);
     }
 
-    @GetHandle("/logout")
+    @GetMapping("/logout")
     public ResponseEntity<?> logout(Session session) {
         session.invalidate();
         return ResponseEntity.ok(null);
