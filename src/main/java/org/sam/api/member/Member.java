@@ -13,7 +13,8 @@ public class Member {
     private String email;
     private String name;
     private String password;
-    private LocalDateTime regDate;
+    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt;
 
     public Long getId() {
         return id;
@@ -47,11 +48,19 @@ public class Member {
         this.password = password;
     }
 
-    public LocalDateTime getRegDate() {
-        return regDate;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setRegDate(LocalDateTime regDate) {
-        this.regDate = regDate;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

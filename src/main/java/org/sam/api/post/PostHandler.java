@@ -7,6 +7,7 @@ import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
 import org.sam.server.constant.HttpStatus;
 import org.sam.server.http.Session;
+import org.sam.server.http.web.response.HttpResponse;
 import org.sam.server.http.web.response.ResponseEntity;
 
 import java.io.IOException;
@@ -51,7 +52,7 @@ public class PostHandler {
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
         if (loginUser == null) return ResponseEntity.of(HttpStatus.UNAUTHORIZED, null);
         Member member = memberService.getMemberInfo(loginUser.getId());
-        post.setWriter(member);
+        post.setMemberId(member.getId());
         Long postId = postService.registerPost(post);
 
         return ResponseEntity.of(HttpStatus.CREATED, postId);

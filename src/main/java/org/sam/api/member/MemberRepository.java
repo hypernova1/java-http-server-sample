@@ -25,8 +25,13 @@ public class MemberRepository extends DefaultSqlExecutor<Member> {
         admin.setEmail("admin@co.kr");
         admin.setPassword("1111");
         admin.setName("admin");
-        admin.setRegDate(LocalDateTime.now());
-        memberList.add(admin);
+        admin.setCreatedAt(LocalDateTime.now());
+        this.insertMember(admin);
+    }
+
+    public void insertMember(Member member) {
+        this.insert("insert into member (email, name, password, created_at, updated_at) values(?, ?, ?, now(), now())",
+                member.getEmail(), member.getName(), member.getPassword());
     }
 
     public Optional<Member> findByEmail(String email) {

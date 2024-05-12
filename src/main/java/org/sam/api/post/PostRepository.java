@@ -27,9 +27,9 @@ public class PostRepository {
             Post post = new Post();
             post.setId(id++);
             post.setTitle("Sample Post" + i);
-            post.setWriter(member);
+            post.setMemberId(1L);
             post.setContent("Sample Content.");
-            post.setRegDate(LocalDateTime.now());
+            post.setCreatedAt(LocalDateTime.now());
             postList.add(post);
         }
     }

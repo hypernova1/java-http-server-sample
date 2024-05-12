@@ -13,13 +13,13 @@ import org.sam.server.annotation.component.Component;
 public class CustomModelMapper {
 
     public void map(Post post, PostDto.ListResponse listResponse) {
-        listResponse.setWriter(post.getWriter().getName());
-        listResponse.setRegDate(post.getRegDate().toString());
+        listResponse.setWriter(post.getMember().getName());
+        listResponse.setRegDate(post.getMember().toString());
     }
 
     public void map(Post post, PostDto.DetailResponse listResponse) {
-        listResponse.setWriter(post.getWriter().getName());
-        listResponse.setRegDate(post.getRegDate().toString());
+        listResponse.setWriter(post.getMember().getName());
+        listResponse.setRegDate(post.getMember().toString());
     }
 
 }

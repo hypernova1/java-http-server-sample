@@ -30,7 +30,7 @@ public class AuthService {
         boolean availableEmail = isAvailableEmail(request.getEmail());
         if (!availableEmail) return false;
         Member member = modelMapper.convert(request, Member.class);
-        member.setRegDate(LocalDateTime.now());
+        member.setCreatedAt(LocalDateTime.now());
         members.save(member);
         return true;
     }

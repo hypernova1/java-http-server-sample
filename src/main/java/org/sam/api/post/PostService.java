@@ -30,7 +30,7 @@ public class PostService {
     }
 
     public Long registerPost(Post post) {
-        post.setRegDate(LocalDateTime.now());
+        post.setCreatedAt(LocalDateTime.now());
         Post savedPost = posts.save(post);
 
         return savedPost.getId();

@@ -12,7 +12,7 @@ public class SqlMapperConfig {
     public DataSource dataSource() {
         DataSourceConfig config = new DataSourceConfig();
         config.setDriverName("org.h2.Driver");
-        config.setUrl("jdbc:h2:~/test");
+        config.setUrl("jdbc:h2:file:./src/main/resources/database/data");
         config.setUser("sa");
         config.setPassword("");
         return new DataSource(config);

@@ -13,8 +13,10 @@ public class Post {
     private Long id;
     private String title;
     private String content;
-    private Member writer;
-    private LocalDateTime regDate;
+    private Long memberId;
+    private Member member;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public Long getId() {
         return id;
@@ -40,20 +42,36 @@ public class Post {
         this.content = content;
     }
 
-    public Member getWriter() {
-        return writer;
+    public Long getMemberId() {
+        return memberId;
     }
 
-    public void setWriter(Member writer) {
-        this.writer = writer;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 
-    public LocalDateTime getRegDate() {
-        return regDate;
+    public Member getMember() {
+        return member;
     }
 
-    public void setRegDate(LocalDateTime regDate) {
-        this.regDate = regDate;
+    public void setMember(Member member) {
+        this.member = member;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public void update(PostDto.UpdateRequest request) {
