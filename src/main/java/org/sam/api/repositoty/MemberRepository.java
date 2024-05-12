@@ -2,8 +2,8 @@ package org.sam.api.repositoty;
 
 import org.sam.api.domain.Member;
 import org.sam.server.annotation.component.Repository;
-import org.sam.sqlmapper.DataSource;
-import org.sam.sqlmapper.DefaultSqlExecutor;
+import org.sam.sqlexecutor.DataSource;
+import org.sam.sqlexecutor.DefaultSqlExecutor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

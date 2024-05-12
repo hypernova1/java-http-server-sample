@@ -6,7 +6,7 @@ import org.sam.api.payload.LoginRequest;
 import org.sam.api.repositoty.MemberRepository;
 import org.sam.api.util.ModelMapper;
 import org.sam.server.annotation.component.Service;
-import org.sam.sqlmapper.DataSource;
+import org.sam.sqlexecutor.DataSource;
 
 import java.time.LocalDateTime;
 

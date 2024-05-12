@@ -2,8 +2,8 @@ package org.sam.api.database;
 
 import org.sam.server.annotation.component.Bean;
 import org.sam.server.annotation.component.Component;
-import org.sam.sqlmapper.DataSource;
-import org.sam.sqlmapper.DataSourceConfig;
+import org.sam.sqlexecutor.DataSource;
+import org.sam.sqlexecutor.DataSourceConfig;
 
 @Component
 public class SqlMapperBean {
