@@ -1,17 +1,9 @@
-package org.sam.api.domain;
+package org.sam.api.auth;
 
-public class LoginUser {
-    private Long id;
+public class JoinRequest {
     private String email;
     private String name;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String password;
 
     public String getEmail() {
         return email;
@@ -27,5 +19,13 @@ public class LoginUser {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

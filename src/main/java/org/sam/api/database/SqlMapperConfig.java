@@ -6,7 +6,7 @@ import org.sam.sqlexecutor.DataSource;
 import org.sam.sqlexecutor.DataSourceConfig;
 
 @Component
-public class SqlMapperBean {
+public class SqlMapperConfig {
 
     @Bean
     public DataSource dataSource() {

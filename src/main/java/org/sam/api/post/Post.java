@@ -1,6 +1,6 @@
-package org.sam.api.domain;
+package org.sam.api.post;
 
-import org.sam.api.payload.PostDto;
+import org.sam.api.member.Member;
 
 import java.time.LocalDateTime;
 

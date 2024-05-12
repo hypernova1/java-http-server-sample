@@ -1,7 +1,7 @@
 package org.sam.api.util;
 
-import org.sam.api.domain.Post;
-import org.sam.api.payload.PostDto;
+import org.sam.api.post.Post;
+import org.sam.api.post.PostDto;
 import org.sam.server.annotation.component.Component;
 
 /**

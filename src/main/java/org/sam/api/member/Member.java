@@ -1,6 +1,4 @@
-package org.sam.api.domain;
-
-import org.sam.api.payload.JoinRequest;
+package org.sam.api.member;
 
 import java.time.LocalDateTime;
 

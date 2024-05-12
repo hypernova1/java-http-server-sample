@@ -1,4 +1,4 @@
-package org.sam.api.payload;
+package org.sam.api.auth;
 
 public class LoginRequest {
     private String email;

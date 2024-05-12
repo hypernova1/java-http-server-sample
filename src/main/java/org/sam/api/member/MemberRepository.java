@@ -1,6 +1,5 @@
-package org.sam.api.repositoty;
+package org.sam.api.member;
 
-import org.sam.api.domain.Member;
 import org.sam.server.annotation.component.Repository;
 import org.sam.sqlexecutor.DataSource;
 import org.sam.sqlexecutor.DefaultSqlExecutor;

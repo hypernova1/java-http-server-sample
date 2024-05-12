@@ -1,7 +1,5 @@
-package org.sam.api.service;
+package org.sam.api.member;
 
-import org.sam.api.domain.Member;
-import org.sam.api.repositoty.MemberRepository;
 import org.sam.server.annotation.component.Service;
 
 @Service

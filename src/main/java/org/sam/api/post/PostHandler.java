@@ -1,11 +1,8 @@
-package org.sam.api.handler;
+package org.sam.api.post;
 
-import org.sam.api.domain.LoginUser;
-import org.sam.api.domain.Member;
-import org.sam.api.domain.Post;
-import org.sam.api.payload.PostDto;
-import org.sam.api.service.MemberService;
-import org.sam.api.service.PostService;
+import org.sam.api.auth.LoginUser;
+import org.sam.api.member.Member;
+import org.sam.api.member.MemberService;
 import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
 import org.sam.server.constant.HttpStatus;

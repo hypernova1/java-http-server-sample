@@ -1,9 +1,7 @@
-package org.sam.api.service;
+package org.sam.api.auth;
 
-import org.sam.api.domain.Member;
-import org.sam.api.payload.JoinRequest;
-import org.sam.api.payload.LoginRequest;
-import org.sam.api.repositoty.MemberRepository;
+import org.sam.api.member.Member;
+import org.sam.api.member.MemberRepository;
 import org.sam.api.util.ModelMapper;
 import org.sam.server.annotation.component.Service;
 

@@ -1,7 +1,6 @@
-package org.sam.api.repositoty;
+package org.sam.api.post;
 
-import org.sam.api.domain.Member;
-import org.sam.api.domain.Post;
+import org.sam.api.member.Member;
 import org.sam.server.annotation.component.Repository;
 
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package org.sam.api.payload;
+package org.sam.api.post;
 
 public class PostDto {
 

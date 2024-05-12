@@ -1,8 +1,5 @@
-package org.sam.api.service;
+package org.sam.api.post;
 
-import org.sam.api.domain.Post;
-import org.sam.api.payload.PostDto;
-import org.sam.api.repositoty.PostRepository;
 import org.sam.api.util.ModelMapper;
 import org.sam.server.annotation.component.Service;
 

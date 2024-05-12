@@ -1,10 +1,6 @@
-package org.sam.api.handler;
+package org.sam.api.auth;
 
-import org.sam.api.domain.LoginUser;
-import org.sam.api.domain.Member;
-import org.sam.api.payload.JoinRequest;
-import org.sam.api.payload.LoginRequest;
-import org.sam.api.service.AuthService;
+import org.sam.api.member.Member;
 import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.GetMapping;
 import org.sam.server.annotation.handle.JsonRequest;
