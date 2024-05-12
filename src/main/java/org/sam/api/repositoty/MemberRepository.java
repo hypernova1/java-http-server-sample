@@ -2,6 +2,8 @@ package org.sam.api.repositoty;
 
 import org.sam.api.domain.Member;
 import org.sam.server.annotation.component.Repository;
+import org.sam.sqlmapper.DataSource;
+import org.sam.sqlmapper.DefaultSqlExecutor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MemberRepository {
+public class MemberRepository extends DefaultSqlExecutor<Member> {
 
     private Long id = 1L;
     List<Member> memberList = new ArrayList<>();
@@ -22,6 +24,10 @@ public class MemberRepository {
         admin.setName("admin");
         admin.setRegDate(LocalDateTime.now());
         memberList.add(admin);
+    }
+
+    public MemberRepository(DataSource dataSource) {
+        super(dataSource);
     }
 
     public Optional<Member> findByEmail(String email) {

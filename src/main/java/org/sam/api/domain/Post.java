@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
  * Time: 8:32 PM
  */
 public class Post {
-
     private Long id;
     private String title;
     private String content;

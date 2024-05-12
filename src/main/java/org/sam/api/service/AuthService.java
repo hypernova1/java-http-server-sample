@@ -6,6 +6,7 @@ import org.sam.api.payload.LoginRequest;
 import org.sam.api.repositoty.MemberRepository;
 import org.sam.api.util.ModelMapper;
 import org.sam.server.annotation.component.Service;
+import org.sam.sqlmapper.DataSource;
 
 import java.time.LocalDateTime;
 
@@ -14,10 +15,12 @@ public class AuthService {
 
     private final MemberRepository members;
     private final ModelMapper modelMapper;
+    private final DataSource dataSource;
 
-    public AuthService(MemberRepository members, ModelMapper modelMapper) {
+    public AuthService(MemberRepository members, ModelMapper modelMapper, DataSource dataSource) {
         this.members = members;
         this.modelMapper = modelMapper;
+        this.dataSource = dataSource;
     }
 
     public Member login(LoginRequest request) {

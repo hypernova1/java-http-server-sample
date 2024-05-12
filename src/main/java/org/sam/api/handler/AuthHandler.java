@@ -12,7 +12,7 @@ import org.sam.server.annotation.handle.PathValue;
 import org.sam.server.annotation.handle.PostMapping;
 import org.sam.server.constant.HttpStatus;
 import org.sam.server.http.Session;
-import org.sam.server.http.web.ResponseEntity;
+import org.sam.server.http.web.response.ResponseEntity;
 
 /**
  * Created by melchor

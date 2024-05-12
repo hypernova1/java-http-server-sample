@@ -10,7 +10,7 @@ import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
 import org.sam.server.constant.HttpStatus;
 import org.sam.server.http.Session;
-import org.sam.server.http.web.ResponseEntity;
+import org.sam.server.http.web.response.ResponseEntity;
 
 import java.io.IOException;
 import java.util.List;
