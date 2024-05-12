@@ -4,7 +4,7 @@ Vue.component('board-item', {
                 <td>{{ post.id }}</td>
                 <td><a @click="viewDetail(post.id)">{{ post.title }}</a></td>
                 <td>{{ post.writer }}</td>
-                <td>{{ post.regDate }}</td>
+                <td>{{ post.createdAt }}</td>
             </tr>
     `,
     props: ['post'],

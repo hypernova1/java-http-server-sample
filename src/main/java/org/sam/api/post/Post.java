@@ -3,6 +3,7 @@ package org.sam.api.post;
 import org.sam.api.member.Member;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Created by melchor
@@ -15,8 +16,8 @@ public class Post {
     private String content;
     private Long memberId;
     private Member member;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private Date createdAt;
+    private Date updatedAt;
 
     public Long getId() {
         return id;
@@ -58,24 +59,29 @@ public class Post {
         this.member = member;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
     public void update(PostDto.UpdateRequest request) {
         this.title = request.getTitle();
         this.content = request.getContent();
+    }
+
+    @Override
+    public String toString() {
+        return "Post [id=" + id + ", title=" + title + ", content=" + content + ", memberId=" + memberId + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
     }
 }

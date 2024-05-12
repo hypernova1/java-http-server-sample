@@ -45,8 +45,8 @@ public class AuthHandler {
 
     @GetMapping("/check-email/{email}")
     public ResponseEntity<?> checkEmail(@PathValue String email) {
-        boolean result = authService.isAvailableEmail(email);
-        if (!result) {
+        boolean existsEmail = authService.existsEmail(email);
+        if (existsEmail) {
             return ResponseEntity.badRequest(null);
         }
         return ResponseEntity.ok(null);

@@ -7,7 +7,6 @@ import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
 import org.sam.server.constant.HttpStatus;
 import org.sam.server.http.Session;
-import org.sam.server.http.web.response.HttpResponse;
 import org.sam.server.http.web.response.ResponseEntity;
 
 import java.io.IOException;
@@ -31,16 +30,16 @@ public class PostHandler {
 
     @RestApi
     @GetMapping
-    public ResponseEntity<?> getPostList() {
-        List<PostDto.ListResponse> postList = postService.getPostList();
+    public ResponseEntity<?> getList() {
+        List<PostDto.ListResponse> postList = postService.getList();
 
         return ResponseEntity.ok(postList);
     }
 
     @RestApi
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPostDetail(@PathValue Long id) {
-        PostDto.DetailResponse post = postService.getPostDetail(id);
+    public ResponseEntity<?> getDetail(@PathValue Long id) {
+        PostDto.DetailResponse post = postService.getDetail(id);
         if (post == null) return ResponseEntity.notFound(null);
 
         return ResponseEntity.ok(post);
@@ -48,30 +47,27 @@ public class PostHandler {
 
     @RestApi
     @PostMapping
-    public ResponseEntity<Object> registerPost(@JsonRequest Post post, Session session) throws IOException {
+    public ResponseEntity<Object> save(@JsonRequest Post post, Session session) throws IOException {
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
         if (loginUser == null) return ResponseEntity.of(HttpStatus.UNAUTHORIZED, null);
-        Member member = memberService.getMemberInfo(loginUser.getId());
-        post.setMemberId(member.getId());
-        Long postId = postService.registerPost(post);
+        Long postId = postService.save(post, loginUser);
 
         return ResponseEntity.of(HttpStatus.CREATED, postId);
     }
 
     @RestApi
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePost(@PathValue Long id, @JsonRequest PostDto.UpdateRequest request) {
-        boolean result = postService.updatePost(id, request);
+    public ResponseEntity<?> update(@PathValue Long id, @JsonRequest PostDto.UpdateRequest request) {
+        boolean result = postService.update(id, request);
         if (!result) return ResponseEntity.badRequest(null);
-        PostDto.DetailResponse postDetail = postService.getPostDetail(id);
-
+        PostDto.DetailResponse postDetail = postService.getDetail(id);
         return ResponseEntity.ok(postDetail);
     }
 
     @RestApi
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletePost(@PathValue Long id) {
-        postService.deletePost(id);
+    public ResponseEntity<?> delete(@PathValue Long id) {
+        postService.delete(id);
         return ResponseEntity.ok(null);
     }
 

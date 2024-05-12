@@ -1,12 +1,20 @@
 package org.sam.api.post;
 
+import java.text.SimpleDateFormat;
+
 public class PostDto {
 
     public static class ListResponse {
         private Long id;
         private String title;
         private String writer;
-        private String regDate;
+        private String createdAt;
+
+        public ListResponse(Post post) {
+            this.id = post.getId();
+            this.title = post.getTitle();
+            this.createdAt = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedAt());
+        }
 
         public Long getId() {
             return id;
@@ -32,12 +40,12 @@ public class PostDto {
             this.writer = writer;
         }
 
-        public String getRegDate() {
-            return regDate;
+        public String getCreatedAt() {
+            return createdAt;
         }
 
-        public void setRegDate(String regDate) {
-            this.regDate = regDate;
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
         }
     }
 
@@ -46,7 +54,15 @@ public class PostDto {
         private String title;
         private String content;
         private String writer;
-        private String regDate;
+        private String createdAt;
+
+        public DetailResponse(Post post) {
+            this.id = post.getId();
+            this.title = post.getTitle();
+            this.content = post.getContent();
+            this.createdAt = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedAt());
+
+        }
 
         public Long getId() {
             return id;
@@ -80,12 +96,12 @@ public class PostDto {
             this.writer = writer;
         }
 
-        public String getRegDate() {
-            return regDate;
+        public String getCreatedAt() {
+            return createdAt;
         }
 
-        public void setRegDate(String regDate) {
-            this.regDate = regDate;
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
         }
     }
 

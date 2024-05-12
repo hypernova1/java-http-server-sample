@@ -12,40 +12,27 @@ import java.util.Optional;
 @Repository
 public class MemberRepository extends DefaultSqlExecutor<Member> {
 
-    private Long id = 1L;
-    List<Member> memberList = new ArrayList<>();
-
     public MemberRepository(DataSource dataSource) {
         super(dataSource);
     }
 
-    {
-        Member admin = new Member();
-        admin.setId(this.id++);
-        admin.setEmail("admin@co.kr");
-        admin.setPassword("1111");
-        admin.setName("admin");
-        admin.setCreatedAt(LocalDateTime.now());
-        this.insertMember(admin);
-    }
-
-    public void insertMember(Member member) {
-        this.insert("insert into member (email, name, password, created_at, updated_at) values(?, ?, ?, now(), now())",
-                member.getEmail(), member.getName(), member.getPassword());
-    }
-
-    public Optional<Member> findByEmail(String email) {
-        return memberList.stream()
-                .filter(member -> member.getEmail().equals(email)).findFirst();
-    }
-
     public Member save(Member member) {
-        member.setId(this.id++);
-        memberList.add(member);
+        int id = this.insert("insert into member (email, name, password, created_at, updated_at) values(?, ?, ?, now(), now())",
+                member.getEmail(), member.getName(), member.getPassword());
+        member.setId(Integer.toUnsignedLong(id));
+
         return member;
     }
 
-    public Optional<Member> findById(Long id) {
-        return memberList.stream().filter(member -> member.getId().equals(id)).findFirst();
+    public List<Member> findAll() {
+        return this.selectAll("SELECT * FROM member");
+    }
+
+    public Member findByEmail(String email) {
+        return this.selectOne("SELECT * FROM member WHERE email = ?", email);
+    }
+
+    public Member findById(Long id) {
+        return this.selectOne("SELECT * FROM member WHERE id = ?", id);
     }
 }

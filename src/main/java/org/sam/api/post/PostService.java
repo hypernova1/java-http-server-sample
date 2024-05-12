@@ -1,9 +1,9 @@
 package org.sam.api.post;
 
+import org.sam.api.auth.LoginUser;
 import org.sam.api.util.ModelMapper;
 import org.sam.server.annotation.component.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,42 +15,42 @@ import java.util.stream.Collectors;
 @Service
 public class PostService {
 
-    private final PostRepository posts;
+    private final PostRepository postRepository;
     private final ModelMapper modelMapper;
 
-    public PostService(PostRepository posts, ModelMapper modelMapper) {
-        this.posts = posts;
+    public PostService(PostRepository postRepository, ModelMapper modelMapper) {
+        this.postRepository = postRepository;
         this.modelMapper = modelMapper;
     }
 
-    public List<PostDto.ListResponse> getPostList() {
-        List<Post> postList = posts.findAll();
+    public List<PostDto.ListResponse> getList() {
+        List<Post> postList = postRepository.findAll();
         return postList.stream()
-                .map(post -> modelMapper.convert(post, PostDto.ListResponse.class)).collect(Collectors.toList());
+                .map(post -> new PostDto.ListResponse(post)).collect(Collectors.toList());
     }
 
-    public Long registerPost(Post post) {
-        post.setCreatedAt(LocalDateTime.now());
-        Post savedPost = posts.save(post);
+    public Long save(Post post, LoginUser loginUser) {
+        post.setMemberId(loginUser.getId());
+        Post savedPost = postRepository.save(post);
 
         return savedPost.getId();
     }
 
-    public PostDto.DetailResponse getPostDetail(Long id) {
-        Post savedPost = posts.findById(id);
-        if (savedPost == null) return null;
-        return modelMapper.convert(savedPost, PostDto.DetailResponse.class);
+    public PostDto.DetailResponse getDetail(Long id) {
+        Post post = postRepository.findById(id);
+        if (post == null) return null;
+        return new PostDto.DetailResponse(post);
     }
 
-    public boolean updatePost(Long id, PostDto.UpdateRequest request) {
-        Post savedPost = posts.findById(id);
-        if (savedPost == null) return false;
-        savedPost.update(request);
+    public boolean update(Long id, PostDto.UpdateRequest request) {
+        Post post = postRepository.findById(id);
+        if (post == null) return false;
+        post.update(request);
 
         return true;
     }
 
-    public void deletePost(Long id) {
-        posts.delete(id);
+    public void delete(Long id) {
+        postRepository.delete(id);
     }
 }

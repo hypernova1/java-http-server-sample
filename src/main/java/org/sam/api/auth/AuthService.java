@@ -5,21 +5,21 @@ import org.sam.api.member.MemberRepository;
 import org.sam.api.util.ModelMapper;
 import org.sam.server.annotation.component.Service;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Service
 public class AuthService {
 
-    private final MemberRepository members;
+    private final MemberRepository memberRepository;
     private final ModelMapper modelMapper;
 
-    public AuthService(MemberRepository members, ModelMapper modelMapper) {
-        this.members = members;
+    public AuthService(MemberRepository memberRepository, ModelMapper modelMapper) {
+        this.memberRepository = memberRepository;
         this.modelMapper = modelMapper;
     }
 
     public Member login(LoginRequest request) {
-        Member member = members.findByEmail(request.getEmail()).orElse(null);
+        Member member = memberRepository.findByEmail(request.getEmail());
         if (member == null) return null;
         boolean result = request.getPassword().equals(member.getPassword());
         if (!result) return null;
@@ -27,16 +27,16 @@ public class AuthService {
     }
 
     public boolean join(JoinRequest request) {
-        boolean availableEmail = isAvailableEmail(request.getEmail());
-        if (!availableEmail) return false;
+        boolean existsEmail = existsEmail(request.getEmail());
+        if (existsEmail) return false;
         Member member = modelMapper.convert(request, Member.class);
-        member.setCreatedAt(LocalDateTime.now());
-        members.save(member);
+        member.setCreatedAt(new Date());
+        memberRepository.save(member);
         return true;
     }
 
-    public boolean isAvailableEmail(String email) {
-        Member member = members.findByEmail(email).orElse(null);
-        return member == null;
+    public boolean existsEmail(String email) {
+        Member member = memberRepository.findByEmail(email);
+        return member != null;
     }
 }

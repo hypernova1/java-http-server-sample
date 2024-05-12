@@ -1,6 +1,6 @@
 package org.sam.api.member;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Created by melchor
@@ -13,8 +13,8 @@ public class Member {
     private String email;
     private String name;
     private String password;
-    private LocalDateTime updatedAt;
-    private LocalDateTime createdAt;
+    private Date updatedAt;
+    private Date createdAt;
 
     public Long getId() {
         return id;
@@ -48,19 +48,24 @@ public class Member {
         this.password = password;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Member [id=" + id + ", email=" + email + ", name=" + name + ", password=" + password + ", updatedAt=" + updatedAt + ", createdAt=" + createdAt + "]";
     }
 }

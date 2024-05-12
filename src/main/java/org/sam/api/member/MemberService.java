@@ -11,12 +11,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public void test() {
-        System.out.println("hello");
-        memberRepository.insertMember(new Member());
-    }
-
     public Member getMemberInfo(Long id) {
-        return memberRepository.findById(id).orElse(null);
+        return memberRepository.findById(id);
     }
 }

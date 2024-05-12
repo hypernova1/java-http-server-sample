@@ -1,10 +1,9 @@
 package org.sam.api.post;
 
-import org.sam.api.member.Member;
 import org.sam.server.annotation.component.Repository;
+import org.sam.sqlexecutor.DataSource;
+import org.sam.sqlexecutor.DefaultSqlExecutor;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,42 +12,27 @@ import java.util.List;
  * Time: 8:33 PM
  */
 @Repository
-public class PostRepository {
+public class PostRepository extends DefaultSqlExecutor<Post> {
 
-    private Long id = 1L;
-    List<Post> postList = new ArrayList<>();
-
-    {
-        Member member = new Member();
-        member.setEmail("tester@test.com");
-        member.setName("tester");
-        member.setPassword("1111");
-        for (int i = 0; i < 10; i++) {
-            Post post = new Post();
-            post.setId(id++);
-            post.setTitle("Sample Post" + i);
-            post.setMemberId(1L);
-            post.setContent("Sample Content.");
-            post.setCreatedAt(LocalDateTime.now());
-            postList.add(post);
-        }
+    public PostRepository(DataSource dataSource) {
+        super(dataSource);
     }
 
     public List<Post> findAll() {
-        return postList;
+        return this.selectAll("SELECT * FROM post");
     }
 
     public Post save(Post post) {
-        post.setId(id++);
-        this.postList.add(post);
+        int id = this.insert("INSERT INTO post (title, content, member_id, created_at, updated_at) VALUES (?, ?, ?, now(), now())", post.getTitle(), post.getContent(), post.getMemberId());
+        post.setId(Integer.toUnsignedLong(id));
         return post;
     }
 
     public Post findById(Long id) {
-        return postList.stream().filter(post -> post.getId().equals(id)).findFirst().orElse(null);
+        return this.selectOne("SELECT * FROM post WHERE id = ?", id);
     }
 
     public void delete(Long id) {
-        postList.removeIf(post -> post.getId().equals(id));
+        this.execute("DELETE FROM post WHERE id = " + id);
     }
 }
