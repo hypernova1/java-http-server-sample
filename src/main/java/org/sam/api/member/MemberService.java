@@ -11,7 +11,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public Member getMemberInfo(Long id) {
+    public Member findOne(Long id) {
         return memberRepository.findById(id);
     }
 }

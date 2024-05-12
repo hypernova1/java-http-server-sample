@@ -1,9 +1,12 @@
 package org.sam.api.post;
 
 import org.sam.api.auth.LoginUser;
-import org.sam.api.util.ModelMapper;
+import org.sam.api.member.Member;
+import org.sam.api.member.MemberRepository;
 import org.sam.server.annotation.component.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,17 +19,25 @@ import java.util.stream.Collectors;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final ModelMapper modelMapper;
+    private final MemberRepository memberRepository;
 
-    public PostService(PostRepository postRepository, ModelMapper modelMapper) {
+    public PostService(PostRepository postRepository, MemberRepository memberRepository) {
         this.postRepository = postRepository;
-        this.modelMapper = modelMapper;
+        this.memberRepository = memberRepository;
     }
 
-    public List<PostDto.ListResponse> getList() {
-        List<Post> postList = postRepository.findAll();
-        return postList.stream()
-                .map(post -> new PostDto.ListResponse(post)).collect(Collectors.toList());
+    public List<PostDto.ListResponse> findAll() {
+        List<Post> posts = postRepository.findAll();
+        List<Long> memberIds = posts.stream().map(Post::getMemberId).collect(Collectors.toCollection(ArrayList::new));
+        List<Member> members = new ArrayList<>();
+        for (Long memberId : memberIds) {
+            members.add(this.memberRepository.findById(memberId));
+        }
+        return posts.stream()
+                .map(post -> {
+                    Member member = members.stream().filter((m) -> m.getId().equals(post.getMemberId())).findFirst().orElse(null);
+                    return new PostDto.ListResponse(post, member);
+                }).collect(Collectors.toList());
     }
 
     public Long save(Post post, LoginUser loginUser) {
@@ -36,7 +47,7 @@ public class PostService {
         return savedPost.getId();
     }
 
-    public PostDto.DetailResponse getDetail(Long id) {
+    public PostDto.DetailResponse findOne(Long id) {
         Post post = postRepository.findById(id);
         if (post == null) return null;
         return new PostDto.DetailResponse(post);

@@ -1,5 +1,7 @@
 package org.sam.api.post;
 
+import org.sam.api.member.Member;
+
 import java.text.SimpleDateFormat;
 
 public class PostDto {
@@ -10,9 +12,10 @@ public class PostDto {
         private String writer;
         private String createdAt;
 
-        public ListResponse(Post post) {
+        public ListResponse(Post post, Member member) {
             this.id = post.getId();
             this.title = post.getTitle();
+            this.writer = member.getName();
             this.createdAt = new SimpleDateFormat("yyyy-MM-dd").format(post.getCreatedAt());
         }
 

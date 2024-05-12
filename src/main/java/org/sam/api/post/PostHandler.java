@@ -1,7 +1,6 @@
 package org.sam.api.post;
 
 import org.sam.api.auth.LoginUser;
-import org.sam.api.member.Member;
 import org.sam.api.member.MemberService;
 import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
@@ -31,7 +30,7 @@ public class PostHandler {
     @RestApi
     @GetMapping
     public ResponseEntity<?> getList() {
-        List<PostDto.ListResponse> postList = postService.getList();
+        List<PostDto.ListResponse> postList = postService.findAll();
 
         return ResponseEntity.ok(postList);
     }
@@ -39,7 +38,7 @@ public class PostHandler {
     @RestApi
     @GetMapping("/{id}")
     public ResponseEntity<?> getDetail(@PathValue Long id) {
-        PostDto.DetailResponse post = postService.getDetail(id);
+        PostDto.DetailResponse post = postService.findOne(id);
         if (post == null) return ResponseEntity.notFound(null);
 
         return ResponseEntity.ok(post);
@@ -60,7 +59,7 @@ public class PostHandler {
     public ResponseEntity<?> update(@PathValue Long id, @JsonRequest PostDto.UpdateRequest request) {
         boolean result = postService.update(id, request);
         if (!result) return ResponseEntity.badRequest(null);
-        PostDto.DetailResponse postDetail = postService.getDetail(id);
+        PostDto.DetailResponse postDetail = postService.findOne(id);
         return ResponseEntity.ok(postDetail);
     }
 
