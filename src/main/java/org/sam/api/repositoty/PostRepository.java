@@ -23,6 +23,7 @@ public class PostRepository {
         Member member = new Member();
         member.setEmail("tester@test.com");
         member.setName("tester");
+        member.setPassword("1111");
         for (int i = 0; i < 10; i++) {
             Post post = new Post();
             post.setId(id++);

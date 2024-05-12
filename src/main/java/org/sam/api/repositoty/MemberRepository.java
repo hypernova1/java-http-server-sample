@@ -16,6 +16,10 @@ public class MemberRepository extends DefaultSqlExecutor<Member> {
     private Long id = 1L;
     List<Member> memberList = new ArrayList<>();
 
+    public MemberRepository(DataSource dataSource) {
+        super(dataSource);
+    }
+
     {
         Member admin = new Member();
         admin.setId(this.id++);
@@ -24,10 +28,6 @@ public class MemberRepository extends DefaultSqlExecutor<Member> {
         admin.setName("admin");
         admin.setRegDate(LocalDateTime.now());
         memberList.add(admin);
-    }
-
-    public MemberRepository(DataSource dataSource) {
-        super(dataSource);
     }
 
     public Optional<Member> findByEmail(String email) {
