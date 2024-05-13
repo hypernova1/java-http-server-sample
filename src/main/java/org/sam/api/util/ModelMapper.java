@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 @Component
 public class ModelMapper {
 
-    private CustomModelMapper customModelMapper;
+    private final CustomModelMapper customModelMapper;
 
     public ModelMapper(CustomModelMapper customModelMapper) {
         this.customModelMapper = customModelMapper;
