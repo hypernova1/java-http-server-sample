@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: org.sam.api.Application
+Class-Path: sambastian-1.0.jar gson-2.8.6.jar log4j-api-2.13.3.jar log4j-core-2.13.3.jar log4j-jcl-2.13.3.jar commons-logging-1.2.jar log4j-slf4j-impl-2.13.3.jar slf4j-api-1.7.25.jar sql-executor-1.0-SNAPSHOT.jar h2-2.2.220.jar
