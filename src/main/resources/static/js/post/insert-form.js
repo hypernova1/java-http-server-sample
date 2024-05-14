@@ -1,4 +1,4 @@
-const BoardInsertForm = Vue.component('board-insert-form', {
+const PostInsertPage = Vue.component('board-insert-form', {
     template: `
             <div>
                 <h1>insert form</h1>
@@ -39,7 +39,7 @@ const BoardInsertForm = Vue.component('board-insert-form', {
                 body: JSON.stringify(this.form),
             }).then((res) => res.json())
                 .then((data) => {
-                    router.push(`/board/${data}`);
+                    router.push(`/post/${data}`);
                 }).catch((err) => alert(err));
         }
     }

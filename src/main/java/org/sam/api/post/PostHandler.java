@@ -6,6 +6,7 @@ import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
 import org.sam.server.constant.HttpStatus;
 import org.sam.server.http.Session;
+import org.sam.server.http.web.response.HttpResponse;
 import org.sam.server.http.web.response.ResponseEntity;
 
 import java.io.IOException;
@@ -20,11 +21,9 @@ import java.util.List;
 public class PostHandler {
 
     private final PostService postService;
-    private final MemberService memberService;
 
-    public PostHandler(PostService postService, MemberService memberService) {
+    public PostHandler(PostService postService) {
         this.postService = postService;
-        this.memberService = memberService;
     }
 
     @RestApi

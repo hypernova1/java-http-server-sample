@@ -1,22 +1,23 @@
-const SignUpForm = Vue.component('sign-up-form', {
+const SignUpPage = Vue.component('sign-up-form', {
     template: `
             <div>
-                <h1>sign-up</h1>
+                <h1>Sign Up</h1>
                 <div>
-                    <label for="email">email:
-                        <input type="text" name="email" v-model="form.email" @change="checkEmail"></label>
+                    <label for="email" style="display: inline-block; width: 65px; font-weight: 600">email</label>
+                    <input type="text" name="email" v-model="form.email" @change="checkEmail">
                 </div>
-                <div>
-                    <label for="name">name:
-                        <input type="text" name="name" v-model="form.name">
-                    </label>
+                <div style="margin-top: 6px">
+                    <label for="name" style="display: inline-block; width: 65px; font-weight: 600">name</label>
+                    <input type="text" name="name" v-model="form.name">
                 </div>
-                <div>
-                    <label for="email">password:
-                        <input type="password" name="password" v-model="form.password">
-                    </label>
+                <div style="margin-top: 6px">
+                    <label for="email" style="display: inline-block; width: 65px; font-weight: 600">password</label>
+                    <input type="password" name="password" v-model="form.password">
                 </div>
-                <button @click="signUp">submit</button>
+                <div style="margin-top: 15px">
+                    <button @click="signUp">submit</button>
+                </div>
+                
             </div>
         `,
     data() {
@@ -68,7 +69,7 @@ const SignUpForm = Vue.component('sign-up-form', {
             }).then((res) => res.json())
                 .then(() => {
                     alert('sign-up success!');
-                    router.push("/");
+                    router.push("/sign-in");
                 })
                 .catch((err) => alert(err));
         }

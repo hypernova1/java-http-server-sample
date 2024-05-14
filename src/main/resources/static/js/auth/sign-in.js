@@ -1,15 +1,14 @@
-const SignInForm = Vue.component('sign-in-form', {
+const SignInPage = Vue.component('sign-in-form', {
     template: `
             <div>
-                <h1>sign-in</h1>
+                <h1>Sign In</h1>
                 <div>
-                    <label for="email">email:
-                        <input type="text" name="email" v-model="form.email"></label>
+                    <label for="email" style="display: inline-block; width: 65px; font-weight: 600">email</label>
+                    <input type="text" name="email" v-model="form.email">
                 </div>
-                <div>
-                    <label for="email">password:
-                        <input type="password" name="password" v-model="form.password">
-                    </label>
+                <div style="margin-top: 6px">
+                    <label for="password" style="display: inline-block; width: 65px; font-weight: 600">password</label>
+                    <input type="password" name="password" v-model="form.password">
                 </div>
                 <button @click="signIn">submit</button>
             </div>
@@ -48,7 +47,7 @@ const SignInForm = Vue.component('sign-in-form', {
                 .then((data) => {
                     alert('sign-in succeed.');
                     vm.loginUser = data;
-                    router.push("/");
+                    router.push("/post");
                 })
                 .catch((err) => alert(err));
         }

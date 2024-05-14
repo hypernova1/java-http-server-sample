@@ -1,4 +1,4 @@
-const BoardDetail = Vue.component('board-detail', {
+const PostDetailPage = Vue.component('board-detail', {
     template:
         `
         <div>
@@ -6,7 +6,7 @@ const BoardDetail = Vue.component('board-detail', {
             <section>
                 {{ postDetail.content }}
             </section>
-            <div><button @click="goBack">list</button></div>
+            <div><button @click="goListPage">list</button></div>
         </div>
     `,
     data() {
@@ -21,8 +21,8 @@ const BoardDetail = Vue.component('board-detail', {
             .then((data) => this.postDetail = data);
     },
     methods: {
-        goBack() {
-            router.go(-1);
+        goListPage() {
+            router.push('/post');
         }
     }
 });

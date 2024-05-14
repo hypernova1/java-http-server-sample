@@ -1,13 +1,13 @@
-const BoardList = Vue.component('board-list', {
+const PostListPage = Vue.component('board-list', {
     template: `
             <section>
-                <h1>board-list</h1>
+                <h1>Post List</h1>
                 <table>
                     <tr>
-                        <th>no</th>
-                        <th>title</th>
-                        <th>writer</th>
-                        <th>register date</th>
+                        <th style="width: 20px">no</th>
+                        <th style="width: 300px; text-align: left; padding: 10px">title</th>
+                        <th style="width: 80px">writer</th>
+                        <th style="width: 120px">register date</th>
                     </tr>
                     <tr is="board-item" v-for="(post, index) in postList" :post="post" :key="index"></tr>
                 </table>
@@ -30,7 +30,7 @@ const BoardList = Vue.component('board-list', {
                 alert('login please..');
                 return;
             }
-            router.push('/board/new');
+            router.push('/post/new');
         }
     }
 });

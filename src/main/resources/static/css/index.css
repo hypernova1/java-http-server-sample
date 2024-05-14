@@ -7,7 +7,7 @@ ul {
 }
 .router-link-exact-active {
     color: white;
-    background-color: darkgrey;
+    font-weight: 700;
 }
 a {
     cursor: pointer;

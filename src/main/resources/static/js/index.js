@@ -1,9 +1,10 @@
 const routes = [
-    { path: '/board', component: BoardList, props: true },
-    { path: '/board/new', component: BoardInsertForm },
-    { path: '/board/:id', component: BoardDetail },
-    { path: '/sign-up', component: SignUpForm },
-    { path: '/sign-in', component: SignInForm },
+    { path: '/', redirect: '/post' },
+    { path: '/post', component: PostListPage, props: true },
+    { path: '/post/new', component: PostInsertPage },
+    { path: '/post/:id', component: PostDetailPage },
+    { path: '/sign-up', component: SignUpPage },
+    { path: '/sign-in', component: SignInPage },
 ];
 const router = new VueRouter({
     routes,
@@ -23,7 +24,7 @@ const vm = new Vue({
                 .then(() => {
                     alert('sign-out succeed.');
                     this.loginUser = null;
-                    router.push('/');
+                    router.push('/post');
                 })
         }
     },

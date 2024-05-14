@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sample Board</title>
+    <title>Sambastian Sample</title>
 </head>
 <body>
 
 <link rel="stylesheet" href="/resources/css/index.css">
 <div id="app">
-    <router-link to="/board">board</router-link>
-    <router-link to="/sign-up" v-if="loginUser === null">sign-up</router-link>
-    <router-link to="/sign-in" v-if="loginUser === null">sign-in</router-link>
-    <a @click="signOut" v-if="loginUser !== null">sign-out</a>
+    <router-link to="/post">Post</router-link>
+    <router-link to="/sign-up" v-if="loginUser === null">Sign Up</router-link>
+    <router-link to="/sign-in" v-if="loginUser === null">Sign In</router-link>
+    <a @click="signOut" v-if="loginUser !== null">Sign Out</a>
     <router-view></router-view>
 </div>
 <script src="/resources/js/vue/vue.js"></script>
 <script src="/resources/js/vue/vue-router.js"></script>
-<script src="/resources/js/board/detail.js"></script>
-<script src="/resources/js/board/insert-form.js"></script>
-<script src="/resources/js/board/list.js"></script>
-<script src="/resources/js/board/item.js"></script>
+<script src="/resources/js/post/detail.js"></script>
+<script src="/resources/js/post/insert-form.js"></script>
+<script src="/resources/js/post/list.js"></script>
+<script src="/resources/js/post/item.js"></script>
 <script src="/resources/js/auth/sign-up.js"></script>
 <script src="/resources/js/auth/sign-in.js"></script>
 <script src="/resources/js/index.js"></script>
