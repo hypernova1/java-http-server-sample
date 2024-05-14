@@ -19,8 +19,6 @@
             <groupId>io.github.hypernova1</groupId>
             <artifactId>sambastian</artifactId>
             <version>1.0</version>
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/target/application-1.0-SNAPSHOT-jar-with-dependencies.jar</systemPath>-->
         </dependency>
         <dependency>
             <groupId>org.sam.sqlexecutor</groupId>
@@ -35,20 +33,6 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -65,16 +49,6 @@
                         <arg>-Xlint:all,-options,-path</arg>
                         <arg>-parameters</arg>
                     </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <archive>
-                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
                 </configuration>
             </plugin>
             <plugin>
@@ -108,7 +82,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.9</version>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>copy</id>
@@ -126,17 +100,7 @@
                         <goals>
                             <goal>build-classpath</goal>
                         </goals>
-                        <configuration>
-                            <!-- configure the plugin here -->
-                        </configuration>
                     </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
                     <execution>
                         <id>copy-dependencies</id>
                         <phase>package</phase>

@@ -18,6 +18,19 @@ public class PostRepository extends DefaultSqlExecutor<Post> {
         super(dataSource);
     }
 
+    {
+        String createTableSQL = "CREATE TABLE If Not Exists post ( " +
+                "id BIGINT PRIMARY KEY AUTO_INCREMENT, " +
+                "title VARCHAR(255) NOT NULL, " +
+                "content CLOB, " +
+                "member_id BIGINT NOT NULL, " +
+                "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, " +
+                "updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL " +
+                ");";
+
+        this.execute(createTableSQL);
+    }
+
     public List<Post> findAll() {
         return this.selectAll("SELECT * FROM post");
     }
