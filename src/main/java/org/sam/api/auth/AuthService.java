@@ -1,6 +1,7 @@
 package org.sam.api.auth;
 
 import org.sam.api.member.Member;
+import org.sam.api.member.MemberH2Repository;
 import org.sam.api.member.MemberRepository;
 import org.sam.api.util.ModelMapper;
 import org.sam.server.annotation.component.Service;

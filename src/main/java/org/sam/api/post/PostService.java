@@ -2,11 +2,11 @@ package org.sam.api.post;
 
 import org.sam.api.auth.LoginUser;
 import org.sam.api.member.Member;
+import org.sam.api.member.MemberH2Repository;
 import org.sam.api.member.MemberRepository;
 import org.sam.server.annotation.component.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
