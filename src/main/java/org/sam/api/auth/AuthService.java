@@ -1,7 +1,8 @@
 package org.sam.api.auth;
 
+import org.sam.api.exception.BadRequestException;
+import org.sam.api.exception.UnauthorizedException;
 import org.sam.api.member.Member;
-import org.sam.api.member.MemberH2Repository;
 import org.sam.api.member.MemberRepository;
 import org.sam.api.util.ModelMapper;
 import org.sam.server.annotation.component.Service;
@@ -21,19 +22,27 @@ public class AuthService {
 
     public Member login(LoginRequest request) {
         Member member = memberRepository.findByEmail(request.getEmail());
-        if (member == null) return null;
+        if (member == null) {
+            throw new UnauthorizedException();
+        };
+
         boolean result = request.getPassword().equals(member.getPassword());
-        if (!result) return null;
+        if (!result) {
+            throw new UnauthorizedException();
+        };
+
         return member;
     }
 
-    public boolean join(JoinRequest request) {
+    public void join(JoinRequest request) {
         boolean existsEmail = existsEmail(request.getEmail());
-        if (existsEmail) return false;
+        if (existsEmail) {
+            throw new BadRequestException();
+        }
+
         Member member = modelMapper.convert(request, Member.class);
         member.setCreatedAt(new Date());
         memberRepository.save(member);
-        return true;
     }
 
     public boolean existsEmail(String email) {

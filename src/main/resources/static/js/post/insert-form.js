@@ -39,6 +39,10 @@ const PostInsertPage = Vue.component('board-insert-form', {
                 body: JSON.stringify(this.form),
             }).then((res) => res.json())
                 .then((data) => {
+                    if (data.status !== 201) {
+                        alert(err);
+                        return;
+                    }
                     router.push(`/post/${data}`);
                 }).catch((err) => alert(err));
         }

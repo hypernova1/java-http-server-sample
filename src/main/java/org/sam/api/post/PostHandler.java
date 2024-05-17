@@ -1,6 +1,8 @@
 package org.sam.api.post;
 
 import org.sam.api.auth.LoginUser;
+import org.sam.api.exception.BadRequestException;
+import org.sam.api.exception.UnauthorizedException;
 import org.sam.api.member.MemberService;
 import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.*;
@@ -30,7 +32,6 @@ public class PostHandler {
     @GetMapping
     public ResponseEntity<?> getList() {
         List<PostDto.ListResponse> postList = postService.findAll();
-
         return ResponseEntity.ok(postList);
     }
 
@@ -38,8 +39,6 @@ public class PostHandler {
     @GetMapping("/{id}")
     public ResponseEntity<?> getDetail(@PathValue Long id) {
         PostDto.DetailResponse post = postService.findOne(id);
-        if (post == null) return ResponseEntity.notFound(null);
-
         return ResponseEntity.ok(post);
     }
 
@@ -47,7 +46,9 @@ public class PostHandler {
     @PostMapping
     public ResponseEntity<Object> save(@JsonRequest Post post, Session session) throws IOException {
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
-        if (loginUser == null) return ResponseEntity.of(HttpStatus.UNAUTHORIZED, null);
+        if (loginUser == null) {
+            throw new UnauthorizedException();
+        }
         Long postId = postService.save(post, loginUser);
 
         return ResponseEntity.of(HttpStatus.CREATED, postId);
@@ -57,7 +58,9 @@ public class PostHandler {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathValue Long id, @JsonRequest PostDto.UpdateRequest request) {
         boolean result = postService.update(id, request);
-        if (!result) return ResponseEntity.badRequest(null);
+        if (!result) {
+            throw new BadRequestException();
+        }
         PostDto.DetailResponse postDetail = postService.findOne(id);
         return ResponseEntity.ok(postDetail);
     }
@@ -66,7 +69,7 @@ public class PostHandler {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathValue Long id) {
         postService.delete(id);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok();
     }
 
 }

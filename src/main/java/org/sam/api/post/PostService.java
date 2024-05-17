@@ -2,7 +2,6 @@ package org.sam.api.post;
 
 import org.sam.api.auth.LoginUser;
 import org.sam.api.member.Member;
-import org.sam.api.member.MemberH2Repository;
 import org.sam.api.member.MemberRepository;
 import org.sam.server.annotation.component.Service;
 
@@ -49,7 +48,9 @@ public class PostService {
 
     public PostDto.DetailResponse findOne(Long id) {
         Post post = postRepository.findById(id);
-        if (post == null) return null;
+        if (post == null) {
+            throw new PostNotFoundException();
+        };
         return new PostDto.DetailResponse(post);
     }
 

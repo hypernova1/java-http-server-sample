@@ -37,11 +37,15 @@ const SignUpPage = Vue.component('sign-up-form', {
             if (!this.form.email) return;
             fetch(`/auth/check-email/${this.form.email}`)
                 .then((res) => res.json())
-                .then(() => {
+                .then((response) => {
+                    if (response.status !== 200) {
+                        alert('email already exist.');
+                        return;
+                    }
                     this.validate.email = true;
                 })
                 .catch(() => {
-                    alert('email already exist.')
+                    alert('server error.')
                     this.validate.email = false;
                 });
         },

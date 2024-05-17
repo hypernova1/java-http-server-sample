@@ -1,5 +1,6 @@
 package org.sam.api.auth;
 
+import org.sam.api.exception.BadRequestException;
 import org.sam.api.member.Member;
 import org.sam.server.annotation.component.Handler;
 import org.sam.server.annotation.handle.GetMapping;
@@ -27,7 +28,6 @@ public class AuthHandler {
     @PostMapping("/login")
     public ResponseEntity<?> login(@JsonRequest LoginRequest request, Session session) {
         Member member = authService.login(request);
-        if (member == null) return ResponseEntity.notFound(null);
         LoginUser loginUser = new LoginUser();
         loginUser.setId(member.getId());
         loginUser.setEmail(member.getEmail());
@@ -38,24 +38,23 @@ public class AuthHandler {
 
     @PostMapping("/join")
     public ResponseEntity<?> join(@JsonRequest JoinRequest request) {
-        boolean result = authService.join(request);
-        if (!result) return ResponseEntity.badRequest(null);
-        return ResponseEntity.of(HttpStatus.CREATED, null);
+        authService.join(request);
+        return ResponseEntity.of(HttpStatus.CREATED);
     }
 
     @GetMapping("/check-email/{email}")
     public ResponseEntity<?> checkEmail(@PathValue String email) {
         boolean existsEmail = authService.existsEmail(email);
         if (existsEmail) {
-            return ResponseEntity.badRequest(null);
+            throw new BadRequestException();
         }
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok();
     }
 
     @GetMapping("/logout")
     public ResponseEntity<?> logout(Session session) {
         session.invalidate();
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok();
     }
 
 }
