@@ -24,7 +24,6 @@ const vm = new Vue({
                 .then(() => {
                     alert('sign-out succeed.');
                     this.loginUser = null;
-                    router.push('/post');
                 })
         }
     },

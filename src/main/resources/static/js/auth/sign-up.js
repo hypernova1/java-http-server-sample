@@ -36,7 +36,6 @@ const SignUpPage = Vue.component('sign-up-form', {
         checkEmail() {
             if (!this.form.email) return;
             fetch(`/auth/check-email/${this.form.email}`)
-                .then((res) => res.json())
                 .then((response) => {
                     if (response.status !== 200) {
                         alert('email already exist.');
@@ -44,7 +43,8 @@ const SignUpPage = Vue.component('sign-up-form', {
                     }
                     this.validate.email = true;
                 })
-                .catch(() => {
+                .catch((e) => {
+                    console.error(e);
                     alert('server error.')
                     this.validate.email = false;
                 });
@@ -68,9 +68,9 @@ const SignUpPage = Vue.component('sign-up-form', {
             }
             fetch('/auth/join', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(this.form),
-            }).then((res) => res.json())
+            })
                 .then(() => {
                     alert('sign-up success!');
                     router.push("/sign-in");
