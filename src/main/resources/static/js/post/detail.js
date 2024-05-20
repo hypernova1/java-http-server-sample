@@ -3,10 +3,10 @@ const PostDetailPage = Vue.component('board-detail', {
         `
         <div>
             <h1>{{ postDetail.title }}</h1>
-            <section>
-                {{ postDetail.content }}
-            </section>
-            <div><button @click="goListPage">list</button></div>
+            <section v-html="formattedContent"></section>
+            <div style="margin-top: 20px">
+                <button @click="goListPage">list</button>
+            </div>
         </div>
     `,
     data() {
@@ -23,6 +23,11 @@ const PostDetailPage = Vue.component('board-detail', {
     methods: {
         goListPage() {
             router.push('/post');
+        }
+    },
+    computed: {
+        formattedContent() {
+            return this.postDetail.content ? this.postDetail.content.replace(/\n/g, '<br>') : '';
         }
     }
 });
