@@ -32,13 +32,16 @@ public class PostH2Repository extends DefaultSqlExecutor<Post> implements PostRe
     }
 
     @Override
-    public List<Post> findAll() {
-        return this.selectAll("SELECT * FROM post");
+    public List<Post> findAll(int page, int size) {
+        int offset = (page - 1) * size;
+        String sql = "SELECT * FROM post ORDER BY id DESC LIMIT ? OFFSET ?";
+        return this.selectAll(sql, size, offset);
     }
 
     @Override
     public Post save(Post post) {
-        int id = this.insert("INSERT INTO post (title, content, member_id, created_at, updated_at) VALUES (?, ?, ?, now(), now())", post.getTitle(), post.getContent(), post.getMemberId());
+        String sql = "INSERT INTO post (title, content, member_id, created_at, updated_at) VALUES (?, ?, ?, now(), now())";
+        int id = this.insert(sql, post.getTitle(), post.getContent(), post.getMemberId());
         post.setId(Integer.toUnsignedLong(id));
         return post;
     }
@@ -51,5 +54,10 @@ public class PostH2Repository extends DefaultSqlExecutor<Post> implements PostRe
     @Override
     public void delete(Long id) {
         this.execute("DELETE FROM post WHERE id = " + id);
+    }
+
+    @Override
+    public int countAll() {
+        return this.count("SELECT COUNT(*) FROM post");
     }
 }

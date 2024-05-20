@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface PostRepository {
 
-    List<Post> findAll();
+    List<Post> findAll(int page, int size);
 
     Post save(Post post);
 
@@ -12,4 +12,5 @@ public interface PostRepository {
 
     void delete(Long id);
 
+    int countAll();
 }

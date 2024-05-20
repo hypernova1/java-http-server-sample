@@ -1,4 +1,4 @@
-package org.sam.api;
+package org.sam.api.common;
 
 import org.sam.api.exception.NotFoundException;
 import org.sam.api.post.PostNotFoundException;

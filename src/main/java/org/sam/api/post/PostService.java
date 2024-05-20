@@ -1,6 +1,7 @@
 package org.sam.api.post;
 
 import org.sam.api.auth.LoginUser;
+import org.sam.api.common.Page;
 import org.sam.api.member.Member;
 import org.sam.api.member.MemberRepository;
 import org.sam.server.annotation.component.Service;
@@ -25,18 +26,22 @@ public class PostService {
         this.memberRepository = memberRepository;
     }
 
-    public List<PostDto.ListResponse> findAll() {
-        List<Post> posts = postRepository.findAll();
+    public Page<PostDto.ListResponse> findAll(int page, int size) {
+        List<Post> posts = postRepository.findAll(page, size);
+        int numberOfPosts = postRepository.countAll();
+
         List<Long> memberIds = posts.stream().map(Post::getMemberId).collect(Collectors.toCollection(ArrayList::new));
         List<Member> members = new ArrayList<>();
         for (Long memberId : memberIds) {
             members.add(this.memberRepository.findById(memberId));
         }
-        return posts.stream()
+        List<PostDto.ListResponse> items = posts.stream()
                 .map(post -> {
                     Member member = members.stream().filter((m) -> m.getId().equals(post.getMemberId())).findFirst().orElse(null);
+                    assert member != null;
                     return new PostDto.ListResponse(post, member);
                 }).collect(Collectors.toList());
+        return new Page<>(size, numberOfPosts, items);
     }
 
     public Long save(Post post, LoginUser loginUser) {

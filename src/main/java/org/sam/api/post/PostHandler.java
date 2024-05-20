@@ -1,6 +1,7 @@
 package org.sam.api.post;
 
 import org.sam.api.auth.LoginUser;
+import org.sam.api.common.Page;
 import org.sam.api.exception.BadRequestException;
 import org.sam.api.exception.UnauthorizedException;
 import org.sam.api.member.MemberService;
@@ -30,8 +31,8 @@ public class PostHandler {
 
     @RestApi
     @GetMapping
-    public ResponseEntity<?> getList() {
-        List<PostDto.ListResponse> postList = postService.findAll();
+    public ResponseEntity<?> getList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
+        Page<PostDto.ListResponse> postList = postService.findAll(page, size);
         return ResponseEntity.ok(postList);
     }
 
@@ -44,7 +45,7 @@ public class PostHandler {
 
     @RestApi
     @PostMapping
-    public ResponseEntity<Object> save(@JsonRequest Post post, Session session) throws IOException {
+    public ResponseEntity<?> save(@JsonRequest Post post, Session session) throws IOException {
         LoginUser loginUser = (LoginUser) session.getAttribute("loginUser");
         if (loginUser == null) {
             throw new UnauthorizedException();
