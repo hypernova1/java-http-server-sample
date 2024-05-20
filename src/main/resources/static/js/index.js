@@ -20,11 +20,13 @@ const vm = new Vue({
     methods: {
         signOut() {
             fetch(`/auth/logout`)
-                .then((res) => res.json())
                 .then(() => {
                     alert('sign-out succeed.');
                     this.loginUser = null;
                 })
+                .catch((error) => {
+                    console.error('Error during sign-out:', error);
+                });
         }
     },
 });
