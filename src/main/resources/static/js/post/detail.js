@@ -1,13 +1,13 @@
 const PostDetailPage = Vue.component('board-detail', {
     template:
         `
-        <div>
+        <div class="post-detail">
             <h1>{{ postDetail.title }}</h1>
             <section v-html="formattedContent"></section>
-            <div style="margin-top: 20px">
-                <button @click="goListPage">list</button>
+            <div class="button-wrapper">
+              <button @click="goListPage">Back to List</button>
             </div>
-        </div>
+          </div>
     `,
     data() {
         return {

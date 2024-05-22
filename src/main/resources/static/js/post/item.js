@@ -1,12 +1,10 @@
 Vue.component('board-item', {
     template: `
             <tr>
-                <td style="width: 20px; text-align: center">{{ post.id }}</td>
-                <td style="min-width: 500px; max-width: 500px; padding: 10px; cursor: pointer; white-space: nowrap; text-overflow: ellipsis; overflow: hidden">
-                    <a @click="viewDetail(post.id)">{{ post.title }}</a>
-                </td>
-                <td style="width: 80px; text-align: center">{{ post.writer }}</td>
-                <td style="width: 120px; text-align: center">{{ post.createdAt }}</td>
+                <td class="post-id">{{ post.id }}</td>
+                <td class="post-title" @click="viewDetail(post.id)"><a>{{ post.title }}</a></td>
+                <td class="post-writer">{{ post.writer }}</td>
+                <td class="post-date">{{ post.createdAt }}</td>
             </tr>
     `,
     props: ['post'],

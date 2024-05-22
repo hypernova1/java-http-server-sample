@@ -1,24 +1,24 @@
 const SignUpPage = Vue.component('sign-up-form', {
     template: `
-            <div>
-                <h1>Sign Up</h1>
-                <div>
-                    <label for="email" style="display: inline-block; width: 65px; font-weight: 600">email</label>
-                    <input type="text" name="email" v-model="form.email" @change="checkEmail">
-                </div>
-                <div style="margin-top: 6px">
-                    <label for="name" style="display: inline-block; width: 65px; font-weight: 600">name</label>
-                    <input type="text" name="name" v-model="form.name">
-                </div>
-                <div style="margin-top: 6px">
-                    <label for="email" style="display: inline-block; width: 65px; font-weight: 600">password</label>
-                    <input type="password" name="password" v-model="form.password">
-                </div>
-                <div style="margin-top: 15px">
-                    <button @click="signUp">submit</button>
-                </div>
-                
-            </div>
+            <div class="sign-up-container">
+  <h1>Sign Up</h1>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" name="email" v-model="form.email" @change="checkEmail" placeholder="Enter your email">
+  </div>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" name="name" v-model="form.name" placeholder="Enter your name">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password" v-model="form.password" placeholder="Enter your password">
+  </div>
+  <div class="form-group">
+    <button @click="signUp">Submit</button>
+  </div>
+</div>
+
         `,
     data() {
         return {

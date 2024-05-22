@@ -1,25 +1,29 @@
 const PostListPage = Vue.component('board-list', {
     template: `
-            <section>
-                <h1>Post List</h1>
-                <table>
-                    <tr>
-                        <th style="width: 20px">no</th>
-                        <th style="width: 300px; text-align: left; padding: 10px">title</th>
-                        <th style="width: 80px">writer</th>
-                        <th style="width: 120px">register date</th>
-                    </tr>
-                    <tr is="board-item" v-for="(post, index) in postList" :post="post" :key="index"></tr>
-                </table>
-                <div style="width: 800px; text-align: center">
-                    <div v-if="totalPage > 0" style="margin-top: 10px">
-                        <button @click="changePage(page)" v-for="page in totalPage" :key="page" :disabled="currentPage === page">
-                            {{ page }}
-                        </button>
-                    </div>
+            <section class="post-list">
+                <h1>Post</h1>
+                <div class="table-wrapper">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>no</th>
+                        <th>Title</th>
+                        <th>Writer</th>
+                        <th>Register Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr is="board-item" v-for="(post, index) in postList" :post="post" :key="index"></tr>
+                    </tbody>
+                  </table>
                 </div>
-                <a @click="goWriterPage">write</a>
-           </section>
+                <div class="pagination">
+                  <div v-if="totalPage > 0" class="pagination-buttons">
+                    <button @click="changePage(page)" v-for="page in totalPageArray" :key="page" :disabled="currentPage === page">{{ page }}</button>
+                  </div>
+                </div>
+                <a @click="goWriterPage" class="write-button">Write</a>
+              </section>
     `,
     data() {
         return {

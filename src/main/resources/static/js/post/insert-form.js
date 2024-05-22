@@ -1,18 +1,16 @@
 const PostInsertPage = Vue.component('board-insert-form', {
     template: `
-            <div>
-                <h1>insert form</h1>
-                <div>
-                    <label for="title">title: 
-                        <input type="text" name="title" v-model="form.title">
-                    </label>
+            <div class="insert-form">
+                <h1>Insert Form</h1>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" v-model="form.title">
                 </div>
-                <div>
-                    <label for="content">content: 
-                        <textarea name="content" v-model="form.content"></textarea>
-                    </label>
+                <div class="form-group">
+                    <label for="content">Content:</label>
+                    <textarea name="content" v-model="form.content"></textarea>
                 </div>
-                <button @click="registerPost">submit</button>
+                <button @click="registerPost">Submit</button>
             </div>
     `,
     data() {

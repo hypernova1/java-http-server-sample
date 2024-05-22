@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Sambastian Sample</title>
+    <link rel="stylesheet" href="/resources/css/index.css">
 </head>
 <body>
-
-<link rel="stylesheet" href="/resources/css/index.css">
-<div id="app">
-    <router-link to="/post">Post</router-link>
-    <router-link to="/sign-up" v-if="loginUser === null">Sign Up</router-link>
-    <router-link to="/sign-in" v-if="loginUser === null">Sign In</router-link>
-    <a @click="signOut" v-if="loginUser !== null">Sign Out</a>
+<div id="app" class="main-container">
+    <nav class="navbar">
+        <router-link to="/post" class="nav-link">Post</router-link>
+        <router-link v-if="!loginUser" to="/sign-up" class="nav-link">Sign Up</router-link>
+        <router-link v-if="!loginUser" to="/sign-in" class="nav-link">Sign In</router-link>
+        <a @click="signOut" v-if="loginUser" class="nav-link">Sign Out</a>
+    </nav>
     <router-view></router-view>
 </div>
 <script src="/resources/js/vue/vue.js"></script>

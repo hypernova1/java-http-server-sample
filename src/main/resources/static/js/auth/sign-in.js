@@ -1,17 +1,17 @@
 const SignInPage = Vue.component('sign-in-form', {
     template: `
-            <div>
-                <h1>Sign In</h1>
-                <div>
-                    <label for="email" style="display: inline-block; width: 65px; font-weight: 600">email</label>
-                    <input type="text" name="email" v-model="form.email">
-                </div>
-                <div style="margin-top: 6px">
-                    <label for="password" style="display: inline-block; width: 65px; font-weight: 600">password</label>
-                    <input type="password" name="password" v-model="form.password">
-                </div>
-                <button @click="signIn">submit</button>
-            </div>
+            <div class="sign-in-container">
+  <h1>Sign In</h1>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" name="email" v-model="form.email" placeholder="Enter your email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password" v-model="form.password" placeholder="Enter your password">
+  </div>
+  <button @click="signIn">Submit</button>
+</div>
         `,
     data() {
         return {
