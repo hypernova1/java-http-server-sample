@@ -10,7 +10,7 @@ import org.sam.server.http.context.HttpServer;
  */
 @ComponentScan
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
         HttpServer.start();
     }
 }

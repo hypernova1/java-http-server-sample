@@ -1,7 +1,8 @@
 package org.sam.api.util;
 
-import org.sam.api.post.Post;
-import org.sam.api.post.PostDto;
+import org.sam.api.post.application.payload.out.PostDetailDto;
+import org.sam.api.post.application.payload.out.PostSummaryDto;
+import org.sam.api.post.domain.Post;
 import org.sam.server.annotation.component.Component;
 
 /**
@@ -12,14 +13,14 @@ import org.sam.server.annotation.component.Component;
 @Component
 public class CustomModelMapper {
 
-    public void map(Post post, PostDto.ListResponse listResponse) {
-        listResponse.setWriter(post.getMember().getName());
-        listResponse.setCreatedAt(post.getMember().toString());
+    public void map(Post post, PostSummaryDto postSummaryDto) {
+        postSummaryDto.setWriter(post.getMember().getName());
+        postSummaryDto.setCreatedAt(post.getMember().toString());
     }
 
-    public void map(Post post, PostDto.DetailResponse listResponse) {
-        listResponse.setWriter(post.getMember().getName());
-        listResponse.setCreatedAt(post.getMember().toString());
+    public void map(Post post, PostDetailDto postDetailDto) {
+        postDetailDto.setWriter(post.getMember().getName());
+        postDetailDto.setCreatedAt(post.getMember().toString());
     }
 
 }

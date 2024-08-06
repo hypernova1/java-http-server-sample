@@ -1,7 +1,7 @@
 package org.sam.api.common;
 
-import org.sam.api.exception.NotFoundException;
-import org.sam.api.post.PostNotFoundException;
+import org.sam.api.common.exception.NotFoundException;
+import org.sam.api.post.domain.PostNotFoundException;
 import org.sam.server.annotation.ExceptionResponse;
 import org.sam.server.annotation.component.Handler;
 import org.sam.server.constant.HttpStatus;
